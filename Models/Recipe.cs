@@ -30,6 +30,4 @@ public partial class Recipe
     public virtual ICollection<Ingredient> IngredientIdIngredients { get; set; } = new List<Ingredient>();
 
     public virtual ICollection<User> UserIdUsers { get; set; } = new List<User>();
-
-    public virtual ICollection<User> UserIdUsersNavigation { get; set; } = new List<User>();
 }

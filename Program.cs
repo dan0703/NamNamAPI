@@ -1,8 +1,11 @@
 using NamNamAPI.Domain;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.EntityFrameworkCore;
 using System.Text;
 using NamNamAPI.Controllers;
+using NamNamAPI.Business;
+using NamNamAPI.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,10 +17,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //MySqlConfiguration
-
+builder.Services.AddDbContext<NamnamContext>(options =>
+                options.UseMySql(
+                    "server=nam-nam-bd.mysql.database.azure.com;database=namnam;uid=NamNamAdminBD;pwd=Azure2023", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.25-mysql"
+                )));
 
 //add controllers
-builder.Services.AddScoped<LoginController>();
+//builder.Services.AddScoped<LoginProvider>();
+builder.Services.AddScoped<TestProvider>();
+builder.Services.AddScoped<CategoryProvider>();
 
 //JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
