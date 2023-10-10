@@ -33,7 +33,7 @@ public partial class NamnamContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=127.0.0.1;database=namnam;user=AdminNamNam;pwd=password2023", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.33-mysql"));
+        => optionsBuilder.UseMySql("server=nam-nam-bd.mysql.database.azure.com;database=namnam;user=NamNamAdminBD;pwd=Azure2023", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.32-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -286,7 +286,7 @@ public partial class NamnamContext : DbContext
 
             entity.ToTable("user");
 
-            entity.HasIndex(e => e.Password, "password_UNIQUE").IsUnique();
+            entity.HasIndex(e => e.Email, "email_UNIQUE").IsUnique();
 
             entity.Property(e => e.IdUser)
                 .HasMaxLength(100)
@@ -332,33 +332,6 @@ public partial class NamnamContext : DbContext
                     });
 
             entity.HasMany(d => d.RecipeIdRecipes).WithMany(p => p.UserIdUsers)
-                .UsingEntity<Dictionary<string, object>>(
-                    "Favorite",
-                    r => r.HasOne<Recipe>().WithMany()
-                        .HasForeignKey("RecipeIdRecipe")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_User_has_Recipe_Recipe1"),
-                    l => l.HasOne<User>().WithMany()
-                        .HasForeignKey("UserIdUser")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_User_has_Recipe_User1"),
-                    j =>
-                    {
-                        j.HasKey("UserIdUser", "RecipeIdRecipe")
-                            .HasName("PRIMARY")
-                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-                        j.ToTable("favorites");
-                        j.HasIndex(new[] { "RecipeIdRecipe" }, "fk_User_has_Recipe_Recipe1_idx");
-                        j.HasIndex(new[] { "UserIdUser" }, "fk_User_has_Recipe_User1_idx");
-                        j.IndexerProperty<string>("UserIdUser")
-                            .HasMaxLength(100)
-                            .HasColumnName("User_idUser");
-                        j.IndexerProperty<string>("RecipeIdRecipe")
-                            .HasMaxLength(100)
-                            .HasColumnName("Recipe_idRecipe");
-                    });
-
-            entity.HasMany(d => d.RecipeIdRecipesNavigation).WithMany(p => p.UserIdUsersNavigation)
                 .UsingEntity<Dictionary<string, object>>(
                     "Favoriterecipelist",
                     r => r.HasOne<Recipe>().WithMany()
