@@ -10,7 +10,7 @@
 
     [ApiController]
     [Route("[controller]")]
-    public class LoginController : Controller
+    public class LoginController : ControllerBase
     {
         private IConfiguration config;
         // private LoginProvider _login;
