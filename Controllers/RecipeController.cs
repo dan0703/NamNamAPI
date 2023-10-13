@@ -15,7 +15,7 @@ namespace NamNamAPI.Controllers
             recipeProvider = _recipeProvider;
         }
 
-        [HttpGet("GetCookbook/{iduser}")]
+        [HttpGet("GetCookbook/{idUser}")]
         public ActionResult GetCookbook(string idUser)
         {
             try
@@ -26,11 +26,7 @@ namespace NamNamAPI.Controllers
                 {
                     return NotFound("No se encontraron recetas para este usuario.");
                 }
-                var result = new JsonResult(new
-                {                   
-                    recipes = recipeList
-                });
-                return Ok(result);
+                return Ok(recipeList);
             }
             catch (Exception ex)
             {
