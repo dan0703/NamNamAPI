@@ -26,6 +26,7 @@ builder.Services.AddDbContext<NamnamContext>(options =>
 //builder.Services.AddScoped<LoginProvider>();
 builder.Services.AddScoped<TestProvider>();
 builder.Services.AddScoped<CategoryProvider>();
+builder.Services.AddScoped<RecipeProvider>();
 
 //JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
