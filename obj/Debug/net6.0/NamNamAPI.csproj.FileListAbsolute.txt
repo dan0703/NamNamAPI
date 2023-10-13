@@ -42,6 +42,8 @@ D:\ArchivosCarrera\escuela\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\
 D:\ArchivosCarrera\escuela\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\NamNamAPI\obj\Debug\net6.0\NamNamAPI.pdb
 D:\ArchivosCarrera\escuela\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\NamNamAPI\obj\Debug\net6.0\NamNamAPI.genruntimeconfig.cache
 D:\ArchivosCarrera\escuela\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\NamNamAPI\obj\Debug\net6.0\ref\NamNamAPI.dll
+<<<<<<< HEAD
+=======
 D:\ArchivosCarrera\SEMESTRES\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\NamNamAPI\bin\Debug\net6.0\appsettings.Development.json
 D:\ArchivosCarrera\SEMESTRES\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\NamNamAPI\bin\Debug\net6.0\appsettings.json
 D:\ArchivosCarrera\SEMESTRES\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\NamNamAPI\bin\Debug\net6.0\NamNamAPI.exe
@@ -174,3 +176,4 @@ C:\Users\Eduar\source\repos\NamNamAPI\API_NamNam\obj\Debug\net6.0\refint\NamNamA
 C:\Users\Eduar\source\repos\NamNamAPI\API_NamNam\obj\Debug\net6.0\NamNamAPI.pdb
 C:\Users\Eduar\source\repos\NamNamAPI\API_NamNam\obj\Debug\net6.0\NamNamAPI.genruntimeconfig.cache
 C:\Users\Eduar\source\repos\NamNamAPI\API_NamNam\obj\Debug\net6.0\ref\NamNamAPI.dll
+>>>>>>> c472d358a4a9319c988c665b7bb7acd1a4c6f4ea
