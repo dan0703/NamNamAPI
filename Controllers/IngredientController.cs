@@ -10,22 +10,22 @@ namespace NamNamAPI.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class CategoryController : ControllerBase
+    public class IngredientController : ControllerBase
     {
-        private CategoryProvider categoryProvider;
-        public CategoryController(CategoryProvider _categoryProvider)
+        private IngredientProvider ingredientProvider;
+        public IngredientController(IngredientProvider _ingredientProvider)
         {
-            categoryProvider = _categoryProvider;
+            ingredientProvider = _ingredientProvider;
         }
 
-        [HttpGet("GetCategories")]
-        public ActionResult GetUsertest()
+        [HttpGet("GetIngredients")]
+        public ActionResult GetIngredients()
         {
-            (int code, List<CategoryDomain> categoriesList, string report) = categoryProvider.getCategories();
+            (int code, List<IngredientDomain> ingredientList) = ingredientProvider.getIngredients();
             if (code == 200)
             {
                 return Ok(
-                    categoriesList
+                    ingredientList
                 );
             }
             else
