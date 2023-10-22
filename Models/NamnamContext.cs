@@ -197,6 +197,7 @@ public partial class NamnamContext : DbContext
             entity.Property(e => e.ImageRecipeUrl)
                 .HasMaxLength(200)
                 .HasColumnName("imageRecipeURL");
+            entity.Property(e => e.Portion).HasColumnName("portion");
             entity.Property(e => e.PreparationTime)
                 .HasColumnType("time")
                 .HasColumnName("preparationTime");

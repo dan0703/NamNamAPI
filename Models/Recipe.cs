@@ -17,6 +17,8 @@ public partial class Recipe
 
     public string IdMainIngredient { get; set; } = null!;
 
+    public int? Portion { get; set; }
+
     public virtual ICollection<Cookinginstruction> Cookinginstructions { get; set; } = new List<Cookinginstruction>();
 
     public virtual Ingredient IdMainIngredientNavigation { get; set; } = null!;

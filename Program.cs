@@ -28,6 +28,7 @@ builder.Services.AddScoped<TestProvider>();
 builder.Services.AddScoped<CategoryProvider>();
 builder.Services.AddScoped<IngredientProvider>();
 builder.Services.AddScoped<RecipeProvider>();
+builder.Services.AddScoped<InstructionProvider>();
 
 //JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(

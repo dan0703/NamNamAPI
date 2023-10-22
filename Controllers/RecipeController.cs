@@ -7,12 +7,14 @@ namespace NamNamAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class RecipeController: ControllerBase
+    public class RecipeController : ControllerBase
     {
         private RecipeProvider recipeProvider;
-        public RecipeController(RecipeProvider _recipeProvider)
+        private InstructionProvider instructionProvider;
+        public RecipeController([FromBody]RecipeProvider _recipeProvider, [FromBody]InstructionProvider _instructionProvider)
         {
             recipeProvider = _recipeProvider;
+            instructionProvider = _instructionProvider;
         }
 
         [HttpGet("GetCookbook/{idUser}")]
@@ -34,6 +36,21 @@ namespace NamNamAPI.Controllers
 
                 return StatusCode(500, "Se produjo un error al procesar la solicitud.");
             }
+
+        }
+
+        [HttpPost("PostRecipe")]
+        public ActionResult PostRecipe([FromBody] NewRecipeDomain newRecipeDomain)
+        {
+            int codeInstruction = 0;
+            int codeRecipe = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain);
+            if (codeRecipe == 1)
+            {
+                codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions);
+                if (codeInstruction == newRecipeDomain.instructions.Count)
+                    return Ok();
+            }
+            return StatusCode(500, "Se produjo un error al procesar la solicitud.");
 
         }
     }

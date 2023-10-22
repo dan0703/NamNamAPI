@@ -1,5 +1,6 @@
 ﻿using NamNamAPI.Domain;
 using NamNamAPI.Models;
+using Newtonsoft.utility;
 using System.Globalization;
 
 namespace NamNamAPI.Business
@@ -36,6 +37,29 @@ namespace NamNamAPI.Business
                 throw new ExceptionBusiness("Error al obtener recetas: " + e.Message);
             }
             return recipeList;
+        }
+
+          public int PostRecipe(RecipeDomain newRecipe)
+        {
+            int changes = 0;
+            try{
+                Recipe recipeTemp = new Recipe{
+                   IdRecipe = GenerateRandomID.GenerateID(),
+                   UserIdUser = newRecipe.User_idUser,
+                   ReceipName = newRecipe.recipeName,
+                   ImageRecipeUrl = "url",
+                   PreparationTime = TimeOnly.Parse("00:00:00"),
+                   IdMainIngredient = newRecipe.idMainIngredient,
+                   Portion = newRecipe.Portion
+                
+                };
+                connectionModel.Recipes.Add(recipeTemp);
+                 changes = connectionModel.SaveChanges();
+                         
+            }catch(Exception e){
+                changes = 500;
+            }
+            return changes;
         }
     }
 }
