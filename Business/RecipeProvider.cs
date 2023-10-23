@@ -39,12 +39,13 @@ namespace NamNamAPI.Business
             return recipeList;
         }
 
-          public int PostRecipe(RecipeDomain newRecipe)
+          public (int,string) PostRecipe(RecipeDomain newRecipe)
         {
             int changes = 0;
+            string idRecipeNew = GenerateRandomID.GenerateID(); 
             try{
                 Recipe recipeTemp = new Recipe{
-                   IdRecipe = GenerateRandomID.GenerateID(),
+                   IdRecipe = idRecipeNew,
                    UserIdUser = newRecipe.User_idUser,
                    ReceipName = newRecipe.recipeName,
                    ImageRecipeUrl = "url",
@@ -59,7 +60,7 @@ namespace NamNamAPI.Business
             }catch(Exception e){
                 changes = 500;
             }
-            return changes;
+            return (changes,idRecipeNew);
         }
     }
 }

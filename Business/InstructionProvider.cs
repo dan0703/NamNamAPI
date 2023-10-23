@@ -16,7 +16,7 @@ namespace NamNamAPI.Business
             connectionModel = _connectionModel;
         }
 
-          public int PostInstruction(List<CookinginstructionDomain> newInstructions)
+          public int PostInstruction(List<CookinginstructionDomain> newInstructions,string idRecipe)
         {
             int changes = 0;
             int steps = 1;
@@ -28,7 +28,7 @@ namespace NamNamAPI.Business
                         IdCookingInstruction = GenerateRandomID.GenerateID(),
                         Instruction = item.Instruction,
                         Step = steps,
-                        RecipeIdRecipe = item.RecipeIdRecipe
+                        RecipeIdRecipe = idRecipe
                     };
                     instructionsTemp.Add(itemBD);
                     steps++;

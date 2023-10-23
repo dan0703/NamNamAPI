@@ -43,10 +43,10 @@ namespace NamNamAPI.Controllers
         public ActionResult PostRecipe([FromBody] NewRecipeDomain newRecipeDomain)
         {
             int codeInstruction = 0;
-            int codeRecipe = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain);
+            (int codeRecipe, string idRecipe) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain);
             if (codeRecipe == 1)
             {
-                codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions);
+                codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions,idRecipe);
                 if (codeInstruction == newRecipeDomain.instructions.Count)
                     return Ok();
             }
