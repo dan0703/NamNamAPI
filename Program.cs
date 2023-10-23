@@ -28,7 +28,7 @@ builder.Services.AddScoped<TestProvider>();
 builder.Services.AddScoped<CategoryProvider>();
 builder.Services.AddScoped<IngredientProvider>();
 builder.Services.AddScoped<RecipeProvider>();
-
+builder.Services.AddScoped<ImageProvider>();
 //JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
     options =>
@@ -52,7 +52,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
