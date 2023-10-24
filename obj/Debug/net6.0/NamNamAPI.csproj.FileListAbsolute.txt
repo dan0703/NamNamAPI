@@ -177,3 +177,4 @@ D:\ArchivosCarrera\SEMESTRES\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAP
 D:\ArchivosCarrera\SEMESTRES\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\NamNamAPI\obj\Debug\net6.0\NamNamAPI.pdb
 D:\ArchivosCarrera\SEMESTRES\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\NamNamAPI\obj\Debug\net6.0\NamNamAPI.genruntimeconfig.cache
 D:\ArchivosCarrera\SEMESTRES\noveno semestre AGO2023-DIC2023\SO Moviles\NamNamAPI\NamNamAPI\obj\Debug\net6.0\ref\NamNamAPI.dll
+C:\Users\Eduar\source\repos\NamNamAPI\API_NamNam\bin\Debug\net6.0\NamNamAPI.staticwebassets.runtime.json
