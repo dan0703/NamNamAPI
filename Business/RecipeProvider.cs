@@ -27,6 +27,7 @@ namespace NamNamAPI.Business
                     recipe.idRecipe = item.IdRecipe;
                     recipe.User_idUser = item.UserIdUser;
                     recipe.recipeName = item.ReceipName;
+                    recipe.imageRecipeURL = item.ImageRecipeUrl;
                     recipe.preparationTime = item.PreparationTime.ToString();
                     recipe.idMainIngredient = item.IdMainIngredient;
                     recipeList.Add(recipe);
