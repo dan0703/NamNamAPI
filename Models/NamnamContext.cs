@@ -27,6 +27,8 @@ public partial class NamnamContext : DbContext
 
     public virtual DbSet<Recipe> Recipes { get; set; }
 
+    public virtual DbSet<RecipeHasIngredient> RecipeHasIngredients { get; set; }
+
     public virtual DbSet<Review> Reviews { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
@@ -95,33 +97,6 @@ public partial class NamnamContext : DbContext
             entity.Property(e => e.Measure)
                 .HasMaxLength(3)
                 .HasColumnName("measure");
-
-            entity.HasMany(d => d.RecipeIdRecipes).WithMany(p => p.IngredientIdIngredients)
-                .UsingEntity<Dictionary<string, object>>(
-                    "RecipeHasIngredient",
-                    r => r.HasOne<Recipe>().WithMany()
-                        .HasForeignKey("RecipeIdRecipe")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_Ingredient_has_Recipe_Recipe1"),
-                    l => l.HasOne<Ingredient>().WithMany()
-                        .HasForeignKey("IngredientIdIngredient")
-                        .OnDelete(DeleteBehavior.ClientSetNull)
-                        .HasConstraintName("fk_Ingredient_has_Recipe_Ingredient1"),
-                    j =>
-                    {
-                        j.HasKey("IngredientIdIngredient", "RecipeIdRecipe")
-                            .HasName("PRIMARY")
-                            .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
-                        j.ToTable("recipe_has_ingredient");
-                        j.HasIndex(new[] { "IngredientIdIngredient" }, "fk_Ingredient_has_Recipe_Ingredient1_idx");
-                        j.HasIndex(new[] { "RecipeIdRecipe" }, "fk_Ingredient_has_Recipe_Recipe1_idx");
-                        j.IndexerProperty<string>("IngredientIdIngredient")
-                            .HasMaxLength(100)
-                            .HasColumnName("Ingredient_idIngredient");
-                        j.IndexerProperty<string>("RecipeIdRecipe")
-                            .HasMaxLength(100)
-                            .HasColumnName("Recipe_idRecipe");
-                    });
         });
 
         modelBuilder.Entity<Nutritionaldatum>(entity =>
@@ -197,6 +172,7 @@ public partial class NamnamContext : DbContext
             entity.Property(e => e.ImageRecipeUrl)
                 .HasMaxLength(200)
                 .HasColumnName("imageRecipeURL");
+            entity.Property(e => e.Portion).HasColumnName("portion");
             entity.Property(e => e.PreparationTime)
                 .HasColumnType("time")
                 .HasColumnName("preparationTime");
@@ -243,6 +219,37 @@ public partial class NamnamContext : DbContext
                             .HasMaxLength(100)
                             .HasColumnName("Category_idCategory");
                     });
+        });
+
+        modelBuilder.Entity<RecipeHasIngredient>(entity =>
+        {
+            entity.HasKey(e => new { e.IngredientIdIngredient, e.RecipeIdRecipe })
+                .HasName("PRIMARY")
+                .HasAnnotation("MySql:IndexPrefixLength", new[] { 0, 0 });
+
+            entity.ToTable("recipe_has_ingredient");
+
+            entity.HasIndex(e => e.IngredientIdIngredient, "fk_Ingredient_has_Recipe_Ingredient1_idx");
+
+            entity.HasIndex(e => e.RecipeIdRecipe, "fk_Ingredient_has_Recipe_Recipe1_idx");
+
+            entity.Property(e => e.IngredientIdIngredient)
+                .HasMaxLength(100)
+                .HasColumnName("Ingredient_idIngredient");
+            entity.Property(e => e.RecipeIdRecipe)
+                .HasMaxLength(100)
+                .HasColumnName("Recipe_idRecipe");
+            entity.Property(e => e.Amount).HasColumnName("amount");
+
+            entity.HasOne(d => d.IngredientIdIngredientNavigation).WithMany(p => p.RecipeHasIngredients)
+                .HasForeignKey(d => d.IngredientIdIngredient)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_Ingredient_has_Recipe_Ingredient1");
+
+            entity.HasOne(d => d.RecipeIdRecipeNavigation).WithMany(p => p.RecipeHasIngredients)
+                .HasForeignKey(d => d.RecipeIdRecipe)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_Ingredient_has_Recipe_Recipe1");
         });
 
         modelBuilder.Entity<Review>(entity =>

@@ -17,17 +17,19 @@ public partial class Recipe
 
     public string IdMainIngredient { get; set; } = null!;
 
+    public int? Portion { get; set; }
+
     public virtual ICollection<Cookinginstruction> Cookinginstructions { get; set; } = new List<Cookinginstruction>();
 
     public virtual Ingredient IdMainIngredientNavigation { get; set; } = null!;
+
+    public virtual ICollection<RecipeHasIngredient> RecipeHasIngredients { get; set; } = new List<RecipeHasIngredient>();
 
     public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
 
     public virtual User UserIdUserNavigation { get; set; } = null!;
 
     public virtual ICollection<Category> CategoryIdCategories { get; set; } = new List<Category>();
-
-    public virtual ICollection<Ingredient> IngredientIdIngredients { get; set; } = new List<Ingredient>();
 
     public virtual ICollection<User> UserIdUsers { get; set; } = new List<User>();
 }

@@ -1,9 +1,12 @@
 namespace NamNamAPI.Domain;
 
 public class RecipeDomain{
-    private string idRecipe {get;set;}
-    private string User_idUser {get;set;}
-    private string recipeName {get;set;}
-    private string instruction {get;set;}
-    private string imageRecipeURL {get;set;} 
+    public string idRecipe {get;set;}
+    public string User_idUser {get;set;}
+    public string recipeName {get;set;}
+
+    public string imageRecipeURL {get;set;}
+    public string preparationTime { get;set;}
+    public string idMainIngredient { get;set;}
+    public int? Portion { get; set; }
 }
