@@ -39,8 +39,9 @@ namespace NamNamAPI.Business
             return recipeList;
         }
 
-          public (int,string) PostRecipe(RecipeDomain newRecipe)
+          public (int,string,string) PostRecipe(RecipeDomain newRecipe)
         {
+            string errormsg = "";
             int changes = 0;
             string idRecipeNew = GenerateRandomID.GenerateID(); 
             try{
@@ -50,7 +51,7 @@ namespace NamNamAPI.Business
                    ReceipName = newRecipe.recipeName,
                    ImageRecipeUrl = "url",
                    PreparationTime = TimeOnly.Parse("00:00:00"),
-                   IdMainIngredient = newRecipe.idMainIngredient,
+                   IdMainIngredient = "i1",//newRecipe.idMainIngredient,
                    Portion = newRecipe.Portion
                 
                 };
@@ -59,8 +60,9 @@ namespace NamNamAPI.Business
                          
             }catch(Exception e){
                 changes = 500;
+                errormsg = e.StackTrace;
             }
-            return (changes,idRecipeNew);
+            return (changes,idRecipeNew,errormsg);
         }
     }
 }

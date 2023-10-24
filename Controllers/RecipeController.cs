@@ -43,14 +43,14 @@ namespace NamNamAPI.Controllers
         public ActionResult PostRecipe([FromBody] NewRecipeDomain newRecipeDomain)
         {
             int codeInstruction = 0;
-            (int codeRecipe, string idRecipe) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain);
+            (int codeRecipe, string idRecipe,string error) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain);
             if (codeRecipe == 1)
             {
                 codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions,idRecipe);
                 if (codeInstruction == newRecipeDomain.instructions.Count)
                     return Ok();
             }
-            return StatusCode(500, "Se produjo un error al procesar la solicitud.");
+            return StatusCode(500, error);
 
         }
     }
