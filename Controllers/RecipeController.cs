@@ -46,12 +46,29 @@ namespace NamNamAPI.Controllers
             (int codeRecipe, string idRecipe,string error) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain);
             if (codeRecipe == 1)
             {
-                codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions,idRecipe);
-                if (codeInstruction == newRecipeDomain.instructions.Count)
+                saveImageRecipe(newRecipeDomain.recipeDomain.imageRecipeURL);
+                // codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions,idRecipe);
+                // if (codeInstruction == newRecipeDomain.instructions.Count)
                     return Ok();
             }
             return StatusCode(500, error);
 
+        }
+
+        public Boolean saveImageRecipe(string imgBase64){
+            Boolean band = true;
+        // Decodificar la cadena Base64 a un arreglo de bytes
+         byte[] imageBytes = Convert.FromBase64String(imgBase64.Split(',')[1]);
+
+        // Ruta donde deseas guardar la imagen (en la raíz del proyecto)
+         string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "imagen.jpg");
+
+        // Guardar la imagen en la carpeta
+        System.IO.File.WriteAllBytes(outputPath, imageBytes);
+
+        Console.WriteLine("Imagen guardada con éxito en " + outputPath);
+
+            return band;
         }
     }
 }
