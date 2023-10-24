@@ -23,7 +23,7 @@ namespace NamNamAPI.Controllers
             // Lógica para devolver la imagen
 
             // Obtener la ruta completa del archivo
-            var rutaArchivo = Path.Combine(Directory.GetCurrentDirectory(), "images", nombreArchivo);
+            var rutaArchivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", nombreArchivo);
 
             // Verificar si el archivo existez
             if (System.IO.File.Exists(rutaArchivo))
