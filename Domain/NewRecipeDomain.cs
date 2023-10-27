@@ -7,6 +7,6 @@ namespace NamNamAPI.Domain;
 public class NewRecipeDomain{
     public RecipeDomain recipeDomain {get; set;}
     public List<CookinginstructionDomain> instructions {get; set;}
-    public Category category {get; set;}
-    public  Recipe_has_IngredientDomain recipeHasIngredients {get;set;}
+     public CategoryDomain category {get; set;}
+     public  List<Recipe_has_IngredientDomain> recipeHasIngredients {get;set;}
 }

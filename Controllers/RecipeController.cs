@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NamNamAPI.Business;
 using NamNamAPI.Domain;
+using NamNamAPI.Utility;
 using System.Collections.Generic;
 
 namespace NamNamAPI.Controllers
@@ -11,10 +12,15 @@ namespace NamNamAPI.Controllers
     {
         private RecipeProvider recipeProvider;
         private InstructionProvider instructionProvider;
-        public RecipeController([FromBody]RecipeProvider _recipeProvider, [FromBody]InstructionProvider _instructionProvider)
+
+        private IngredientProvider ingredientProvider;
+
+        public RecipeController([FromBody] RecipeProvider _recipeProvider, [FromBody] InstructionProvider _instructionProvider, [FromBody] IngredientProvider _ingredientProvider)
         {
             recipeProvider = _recipeProvider;
             instructionProvider = _instructionProvider;
+            ingredientProvider = _ingredientProvider;
+
         }
 
         [HttpGet("GetCookbook/{idUser}")]
@@ -43,32 +49,45 @@ namespace NamNamAPI.Controllers
         public ActionResult PostRecipe([FromBody] NewRecipeDomain newRecipeDomain)
         {
             int codeInstruction = 0;
-            (int codeRecipe, string idRecipe,string error) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain);
-            if (codeRecipe == 1)
+            //primero guarda la foto y regreso el id para guardarla en recipe
+
+            //REGISTRO DE RECIPE Y RECIPE_HAS_INGREDIENTS
+            (int codeRecipe, string idRecipe, string error) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain, newRecipeDomain.category);
+            if (codeRecipe == 2)
             {
-                saveImageRecipe(newRecipeDomain.recipeDomain.imageRecipeURL);
-                // codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions,idRecipe);
-                // if (codeInstruction == newRecipeDomain.instructions.Count)
-                    return Ok();
+                //REGISTRO DE INSTRUCTIONS
+                codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions, idRecipe);
+                if (codeInstruction == newRecipeDomain.instructions.Count)
+                {
+                    //REGISTRO DE INGREDIENTS
+                    int codeIngredients = ingredientProvider.setRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, idRecipe);
+                    if (codeIngredients == 200)
+                        return Ok();
+                }
             }
             return StatusCode(500, error);
-
         }
 
-        public Boolean saveImageRecipe(string imgBase64){
-            Boolean band = true;
-        // Decodificar la cadena Base64 a un arreglo de bytes
-         byte[] imageBytes = Convert.FromBase64String(imgBase64.Split(',')[1]);
-
-        // Ruta donde deseas guardar la imagen (en la raíz del proyecto)
-         string outputPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Images", "imagen.jpg");
-
-        // Guardar la imagen en la carpeta
-        System.IO.File.WriteAllBytes(outputPath, imageBytes);
-
-        Console.WriteLine("Imagen guardada con éxito en " + outputPath);
-
-            return band;
+        [HttpGet("GetRecipe/{idRecipe}")]
+        public ActionResult GetRecipe(string idRecipe)
+        {
+            int code = 0;
+            GetRecipeResponse recipe = new GetRecipeResponse();
+            try
+            {
+                (code, recipe) = recipeProvider.getRecipe(idRecipe);
+                Console.WriteLine("CODIGO--------------"+ code);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+            if(code == 200)
+            return Ok(recipe);
+            else
+            return StatusCode(404);
         }
+
     }
+
 }

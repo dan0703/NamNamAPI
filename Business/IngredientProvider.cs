@@ -25,7 +25,8 @@ namespace NamNamAPI.Business
                 var listTemp = connectionModel.Ingredients.ToList();
                 foreach (var item in listTemp)
                 {
-                    IngredientDomain ingredient = new IngredientDomain{
+                    IngredientDomain ingredient = new IngredientDomain
+                    {
                         idIngredient = item.IdIngredient,
                         ingredientname = item.IngredientName,
                         measure = item.Measure
@@ -39,6 +40,32 @@ namespace NamNamAPI.Business
                 report = e.Message;
             }
             return (code, ingredientList);
+        }
+
+        public int setRecipeHasIngredients(List<Recipe_has_IngredientDomain> ingredientsList, string idRecipe)
+        {
+            int code = 200;
+            try
+            {
+                List<RecipeHasIngredient> list = new List<RecipeHasIngredient>();
+                foreach (var item in ingredientsList)
+                {
+                    RecipeHasIngredient recipeHasIngredient = new RecipeHasIngredient();
+                    recipeHasIngredient.IngredientIdIngredient = item.Ingredient_idIngredient;
+                    recipeHasIngredient.RecipeIdRecipe = idRecipe;
+                    recipeHasIngredient.Amount = item.Amount;
+                    list.Add(recipeHasIngredient);
+                }
+                connectionModel.RecipeHasIngredients.AddRange(list);
+                int changes = connectionModel.SaveChanges();
+                if (changes != ingredientsList.Count)
+                    code = 500;
+            }
+            catch (Exception e)
+            {
+                code = 500;
+            }
+            return code;
         }
     }
 }
