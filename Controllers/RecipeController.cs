@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NamNamAPI.Business;
 using NamNamAPI.Domain;
+using NamNamAPI.Utility;
 using System.Collections.Generic;
 
 namespace NamNamAPI.Controllers
@@ -11,10 +12,15 @@ namespace NamNamAPI.Controllers
     {
         private RecipeProvider recipeProvider;
         private InstructionProvider instructionProvider;
-        public RecipeController([FromBody]RecipeProvider _recipeProvider, [FromBody]InstructionProvider _instructionProvider)
+
+        private IngredientProvider ingredientProvider;
+
+        public RecipeController([FromBody] RecipeProvider _recipeProvider, [FromBody] InstructionProvider _instructionProvider, [FromBody] IngredientProvider _ingredientProvider)
         {
             recipeProvider = _recipeProvider;
             instructionProvider = _instructionProvider;
+            ingredientProvider = _ingredientProvider;
+
         }
 
         [HttpGet("GetCookbook/{idUser}")]
@@ -43,15 +49,45 @@ namespace NamNamAPI.Controllers
         public ActionResult PostRecipe([FromBody] NewRecipeDomain newRecipeDomain)
         {
             int codeInstruction = 0;
-            (int codeRecipe, string idRecipe,string error) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain);
-            if (codeRecipe == 1)
+            //primero guarda la foto y regreso el id para guardarla en recipe
+
+            //REGISTRO DE RECIPE Y RECIPE_HAS_INGREDIENTS
+            (int codeRecipe, string idRecipe, string error) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain, newRecipeDomain.category);
+            if (codeRecipe == 2)
             {
-                codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions,idRecipe);
+                //REGISTRO DE INSTRUCTIONS
+                codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions, idRecipe);
                 if (codeInstruction == newRecipeDomain.instructions.Count)
-                    return Ok();
+                {
+                    //REGISTRO DE INGREDIENTS
+                    int codeIngredients = ingredientProvider.setRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, idRecipe);
+                    if (codeIngredients == 200)
+                        return Ok();
+                }
             }
             return StatusCode(500, error);
-
         }
+
+        [HttpGet("GetRecipe/{idRecipe}")]
+        public ActionResult GetRecipe(string idRecipe)
+        {
+            int code = 0;
+            GetRecipeResponse recipe = new GetRecipeResponse();
+            try
+            {
+                (code, recipe) = recipeProvider.getRecipe(idRecipe);
+                Console.WriteLine("CODIGO--------------"+ code);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+            if(code == 200)
+            return Ok(recipe);
+            else
+            return StatusCode(404);
+        }
+
     }
+
 }

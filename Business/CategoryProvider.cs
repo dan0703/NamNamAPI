@@ -39,5 +39,13 @@ namespace NamNamAPI.Business
             }
             return (code, categoryList,report);
         }
+
+        // public int SetRecipeHasCategory(CategoryDomain category, int idRecipe){//pendiente
+        //     int changes = 0;
+        //         RecipeHasCategory recipeHasIngredient = new RecipehasCategory{
+
+        //         }
+        //     return changes;
+        // }
     }
 }
