@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "Hash": "maGZT9YU6K2TirBEVtwcBC0HDeUJpbHiLlRthYKC6QQ=",
+  "Source": "NamNamAPI",
+  "BasePath": "_content/NamNamAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "NamNamAPI\\wwwroot",
+      "Source": "NamNamAPI",
+      "ContentRoot": "C:\\Users\\crisa\\Desktop\\APINamNam\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\crisa\\Desktop\\APINamNam\\API_NamNam\\wwwroot\\Images\\poz.jpg",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\crisa\\Desktop\\APINamNam\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "Images/poz.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\poz.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\crisa\\Desktop\\APINamNam\\API_NamNam\\wwwroot\\test.cs",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\crisa\\Desktop\\APINamNam\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "test.cs",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\test.cs"
+    }
+  ]
+}
