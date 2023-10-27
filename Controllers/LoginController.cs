@@ -7,41 +7,49 @@
     using System.IdentityModel.Tokens.Jwt;
     using System.Text;
     using Microsoft.AspNetCore.Mvc;
+    using NamNamAPI.Business;
+    using NamNamAPI.Models;
+    using System.Net;
 
     [ApiController]
     [Route("[controller]")]
     public class LoginController : ControllerBase
     {
         private IConfiguration config;
-        // private LoginProvider _login;
+        private readonly LoginProvider _login;
 
-        public LoginController(IConfiguration config)
+        public LoginController(IConfiguration config, LoginProvider login)
         {
             this.config = config;
-            //codigo para iniciiarlizar el provider
+            _login = login;
         }
 
-        [HttpPost("ValiLoginUser")]
-        public ActionResult ValidateLoginUser([FromBody] LoginDomain loginCredentials)
+        [ApiExplorerSettings(IgnoreApi = false)]
+        [HttpPost("LoginUser")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult> ValidateLoginUser([FromBody] LoginDomain loginCredentials)
         {
-            //llamada aprovider
-            //
-
-            UserDomain userTest = new UserDomain() { firstname = "das", email = "correo@homail", password = "123" };
-            if (loginCredentials.email.Equals("aa"))
+            try
             {
-                string jwtToken = GenerateToken(userTest);
-                return new JsonResult(new
+                UserDomain user = await _login.Login(loginCredentials);
+                string jwtToken = "";
+                if (user == null)
                 {
-                    code = 200,
-                    user = userTest,
-                    token = jwtToken
-                });
+                    return NotFound();
+                } else{
+                     jwtToken = GenerateToken(user);
+                }
+                return Ok(new JsonResult(new {jwtToken, user.idUser}));
             }
-            return new JsonResult(new { code = 403});
-
-
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+            }
+            return BadRequest(new JsonResult(new {code = 500}));
         }
+
+
 
         [ApiExplorerSettings(IgnoreApi = true)]
         public string GenerateToken(UserDomain userDomain)
