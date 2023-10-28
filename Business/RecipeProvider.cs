@@ -156,5 +156,23 @@ namespace NamNamAPI.Business
             }
             return (code, response);
         }
+
+
+        public List<RecipeDomain> getRecipeTest()
+        {
+            List<RecipeDomain> listDomain = new List<RecipeDomain>();
+            GetRecipeResponse response = new GetRecipeResponse();
+           
+                //RECIPE
+                List<Recipe> recipeModel = connectionModel.Recipes.ToList();
+                foreach(var item in recipeModel){
+                    RecipeDomain x = new RecipeDomain();
+                    x.idRecipe = item.IdRecipe;
+                    x.recipeName = item.ReceipName;
+                    listDomain.Add(x);
+                }
+            
+            return listDomain;
+        }
     }
 }
