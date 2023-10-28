@@ -10,6 +10,7 @@
     using NamNamAPI.Business;
     using NamNamAPI.Models;
     using System.Net;
+    using Newtonsoft.utility;
 
     [ApiController]
     [Route("[controller]")]
@@ -47,6 +48,27 @@
                 Console.WriteLine(ex.StackTrace);
             }
             return BadRequest(new JsonResult(new {code = 500}));
+        }
+
+        [ApiExplorerSettings(IgnoreApi = false)]
+        [HttpPost("RegisterUser")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<ActionResult> RegisterUser([FromBody] UserDomain userInformation){
+            try{
+
+                userInformation.idUser = GenerateRandomID.GenerateID();
+
+                var result = await _login.Register(userInformation);
+                if(result == null){
+                    return BadRequest(new JsonResult(new {code = 500}));
+                }
+                return Ok(result);
+            }
+            catch(Exception ex){
+                Console.WriteLine(ex.StackTrace);
+                return BadRequest(new JsonResult(new {code = 500}));
+            }
         }
 
 
