@@ -31,6 +31,7 @@ builder.Services.AddScoped<RecipeProvider>();
 
 builder.Services.AddScoped<InstructionProvider>();
 builder.Services.AddScoped<LoginProvider>();
+builder.Services.AddScoped<ReviewProvider>();
 
 
 builder.Services.AddScoped<ImageProvider>();

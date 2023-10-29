@@ -31,12 +31,55 @@ namespace NamNamAPI.Business
                 {
                     var user = await _connectionModel.Users.Where(x => x.Email == login.email && x.Password == login.password).FirstOrDefaultAsync();
 
-                    return new UserDomain
+                    if (user == null)
                     {
-                        idUser = user.IdUser,
-                        firstname = user.FirstName,
-                        email = user.Email,
+                        return null;
+                    }else{
+                        return new UserDomain
+                        {
+                            idUser = user.IdUser,
+                            firstname = user.FirstName,
+                            email = user.Email,
+                        };
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public async Task<string> Register(UserDomain user)
+        {
+            bool canConnect = await _connectionModel.Database.CanConnectAsync();
+            try
+            {
+                if (!canConnect)
+                {
+                    throw new Exception("No se pudo establecer conexión con la base de datos.");
+                }
+                else
+                {
+                    var newUser = new User
+                    {
+                        IdUser = user.idUser,
+                        FirstName = user.firstname,
+                        LastName = user.lastname,
+                        Email = user.email,
+                        Password = user.password,
                     };
+
+                    var result =_connectionModel.Users.Add(newUser);
+
+                    await _connectionModel.SaveChangesAsync();
+
+                    if(result != null)
+                    {
+                        return newUser.IdUser;
+                    }else{
+                        return null;
+                    }
                 }
             }
             catch (Exception e)
