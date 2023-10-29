@@ -11,6 +11,7 @@
     using NamNamAPI.Models;
     using System.Net;
     using Newtonsoft.utility;
+    using System.Net.Http;
 
     [ApiController]
     [Route("[controller]")]
@@ -29,6 +30,8 @@
         [HttpPost("LoginUser")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> ValidateLoginUser([FromBody] LoginDomain loginCredentials)
         {
             try
@@ -37,7 +40,7 @@
                 string jwtToken = "";
                 if (user == null)
                 {
-                    return NotFound();
+                    return NotFound(StatusCodes.Status404NotFound);
                 } else{
                      jwtToken = GenerateToken(user);
                 }
@@ -46,14 +49,14 @@
             catch (Exception ex)
             {
                 Console.WriteLine(ex.StackTrace);
+                return StatusCode((int)HttpStatusCode.InternalServerError);
             }
-            return BadRequest(new JsonResult(new {code = 500}));
         }
 
         [ApiExplorerSettings(IgnoreApi = false)]
         [HttpPost("RegisterUser")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> RegisterUser([FromBody] UserDomain userInformation){
             try{
 
@@ -61,13 +64,13 @@
 
                 var result = await _login.Register(userInformation);
                 if(result == null){
-                    return BadRequest(new JsonResult(new {code = 500}));
+                    return StatusCode((int)HttpStatusCode.InternalServerError);
                 }
                 return Ok(result);
             }
             catch(Exception ex){
                 Console.WriteLine(ex.StackTrace);
-                return BadRequest(new JsonResult(new {code = 500}));
+                return StatusCode((int)HttpStatusCode.InternalServerError);
             }
         }
 
