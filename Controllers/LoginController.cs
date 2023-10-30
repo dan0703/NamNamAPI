@@ -43,7 +43,7 @@
                 } else{
                      jwtToken = GenerateToken(user);
                 }
-                return Ok(new { jwtToken, user.idUser});
+                return Ok(new JsonResult(new {jwtToken, user.idUser}));
             }
             catch (Exception ex)
             {
