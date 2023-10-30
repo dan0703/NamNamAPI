@@ -29,7 +29,6 @@
         [ApiExplorerSettings(IgnoreApi = false)]
         [HttpPost("LoginUser")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> ValidateLoginUser([FromBody] LoginDomain loginCredentials)
@@ -40,11 +39,11 @@
                 string jwtToken = "";
                 if (user == null)
                 {
-                    return NotFound(StatusCodes.Status404NotFound);
+                    return NotFound();
                 } else{
                      jwtToken = GenerateToken(user);
                 }
-                return Ok(new JsonResult(new {jwtToken, user.idUser}));
+                return Ok(new { jwtToken, user.idUser});
             }
             catch (Exception ex)
             {
