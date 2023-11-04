@@ -9,4 +9,5 @@ public class RecipeDomain{
     public string preparationTime { get;set;}
     public string idMainIngredient { get;set;}
     public int? Portion { get; set; }
+    public byte[]? ImageBytes {get;set;}
 }

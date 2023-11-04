@@ -35,5 +35,35 @@ namespace NamNamAPI.Controllers
 
 
         }
+
+         [HttpGet("GetUserPreferences/{idUser}")]
+        public ActionResult GetUserPreferences(string idUser)
+        {
+            (int code, GetPreferenceResponse preferencesResponse) = categoryProvider.getUserPreferences(idUser);
+            if (code == 200)
+            {
+                return Ok(
+                    preferencesResponse
+                );
+            }
+            else
+            {
+                return StatusCode(code);
+            }
+
+        }
+
+
+        [HttpPost("SetUserPreference")]
+        public ActionResult SetUserPreference([FromBody] SetPreferenceResponse preference)
+        {
+            int code = categoryProvider.SetUserPreferences(preference);
+            if (code == 200)
+            {
+                return Ok();
+            }
+            return StatusCode(code);
+
+        }
     }
 }

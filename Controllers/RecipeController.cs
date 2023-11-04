@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NamNamAPI.Business;
 using NamNamAPI.Domain;
+using NamNamAPI.Models;
 using NamNamAPI.Utility;
 using System.Collections.Generic;
 
@@ -86,6 +87,24 @@ namespace NamNamAPI.Controllers
             return Ok(recipe);
             else
             return StatusCode(404);
+        }
+
+        [HttpGet("GetRecipesTest")]
+        public ActionResult GetRecipeTest()
+        {
+            List<RecipeDomain> list = new List<RecipeDomain>();
+            GetRecipeResponse recipe = new GetRecipeResponse();
+            try
+            {
+                list = recipeProvider.getRecipeTest();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500);
+            }
+          
+            return Ok(list);
+
         }
 
     }
