@@ -12,11 +12,11 @@ namespace NamNamAPI.Controllers
     public class ReviewController : ControllerBase
     {
         private ReviewProvider reviewProvider;
-      
+
         public ReviewController([FromBody] ReviewProvider _reviewProvider)
         {
             reviewProvider = _reviewProvider;
-            
+
         }
 
 
@@ -24,28 +24,40 @@ namespace NamNamAPI.Controllers
         [HttpGet("Getreview/{idRecipe}")]
         public ActionResult GetReviews(string idRecipe)
         {
-           (int code , List<ReviewDomain> reviews) = reviewProvider.getReviews(idRecipe);
-           if(code == 200)
-           {
-            return Ok(reviews);
-           }
+            (int code, List<ReviewDomain> reviews) = reviewProvider.getReviews(idRecipe);
+            if (code == 200)
+            {
+                return Ok(reviews);
+            }
             return StatusCode(code);
 
         }
 
-         [HttpPost("setReview")]
-        public ActionResult SetReview([FromBody]ReviewDomain review)
+        [HttpPost("setReview")]
+        public ActionResult SetReview([FromBody] ReviewDomain review)
         {
-           int code  = reviewProvider.setReview(review);
-           if(code == 200)
-           {
-            return Ok();
-           }
+            int code = reviewProvider.setReview(review);
+            if (code == 200)
+            {
+                return Ok();
+            }
             return StatusCode(code);
 
         }
 
-        
+        [HttpPost("EditReview")]
+        public ActionResult EditReview([FromBody] ReviewDomain review)
+        {
+            int code = reviewProvider.EditReview(review);
+            if (code == 200)
+            {
+                return Ok();
+            }
+            return StatusCode(code);
+
+        }
+
+
 
     }
 

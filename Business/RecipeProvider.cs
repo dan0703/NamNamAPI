@@ -47,27 +47,49 @@ namespace NamNamAPI.Business
             string errormsg = "";
             int changes = 0;
             string idRecipeNew = GenerateRandomID.GenerateID();
+
+
             try
             {
-                Category categoryModel = connectionModel.Categories.Find(categoryDomain.idCategory);
-                if (categoryModel != null)
-                {
-                    Recipe recipeTemp = new Recipe
+
+
+                // // Verificar si los bytes de la imagen no son nulos y tienen contenido.
+                // if (newRecipe.ImageBytes != null && newRecipe.ImageBytes.Length > 0)
+                // {
+                //     // Ruta de la carpeta donde se guardarán las imágenes (debes ajustarla según tu proyecto).
+                //     string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images");
+
+                //     // Verificar si la carpeta existe; si no, créala.
+                //     if (!Directory.Exists(folderPath))
+                //     {
+                //         Directory.CreateDirectory(folderPath);
+                //     }
+
+                //     // Generar un nombre de archivo único para evitar colisiones.
+                //     string fileName = Guid.NewGuid().ToString() + ".jpg";
+                //     string filePath = Path.Combine(folderPath, fileName);
+
+                //     // Guardar los bytes en el archivo.
+                //     File.WriteAllBytes(filePath, newRecipe.ImageBytes);
+                //     ///////////////////////////
+                    Category categoryModel = connectionModel.Categories.Find(categoryDomain.idCategory);
+                    if (categoryModel != null)
                     {
-                        IdRecipe = idRecipeNew,
-                        UserIdUser = newRecipe.User_idUser,
-                        ReceipName = newRecipe.recipeName,
-                        ImageRecipeUrl = "url",
-                        PreparationTime = TimeOnly.Parse("00:00:00"),
-                        IdMainIngredient = newRecipe.idMainIngredient,
-                        Portion = newRecipe.Portion,
-                    };
-                    recipeTemp.CategoryIdCategories.Add(categoryModel);
-                    connectionModel.Recipes.Add(recipeTemp);
-                    changes = connectionModel.SaveChanges();
-                }
-
-
+                        Recipe recipeTemp = new Recipe
+                        {
+                            IdRecipe = idRecipeNew,
+                            UserIdUser = newRecipe.User_idUser,
+                            ReceipName = newRecipe.recipeName,
+                            ImageRecipeUrl = "https://nam-nam-api.azurewebsites.net/Image/poz.jpg",
+                            PreparationTime = TimeOnly.Parse("00:00:00"),
+                            IdMainIngredient = newRecipe.idMainIngredient,
+                            Portion = newRecipe.Portion,
+                        };
+                        recipeTemp.CategoryIdCategories.Add(categoryModel);
+                        connectionModel.Recipes.Add(recipeTemp);
+                        changes = connectionModel.SaveChanges();
+                    }
+                
             }
             catch (Exception e)
             {
@@ -115,13 +137,15 @@ namespace NamNamAPI.Business
                     step.Step = item.Step;
                     instructionTempList.Add(step);
                 }
+                //LISTA DE INGREDIENTS
                 List<Recipe_has_IngredientDomain> amountTempList = new List<Recipe_has_IngredientDomain>();
                 List<IngredientDomain> ingredientsTempList = new List<IngredientDomain>();
+                List<string> idIngredientList = new List<string>();
                 foreach (var ingredientItem in ingredientListModel)
                 {
                     foreach (var amountTemp in recipeHasIngredientsListModel)
                     {
-                        if(amountTemp.IngredientIdIngredient == ingredientItem.IdIngredient)
+                        if (amountTemp.IngredientIdIngredient == ingredientItem.IdIngredient)
                         {
                             IngredientDomain ingredientTemp = new IngredientDomain();//contiene el nombre y la unidad
                             Recipe_has_IngredientDomain recipeHasIngredientTemp = new Recipe_has_IngredientDomain();//contiene la cantidad
@@ -134,10 +158,26 @@ namespace NamNamAPI.Business
                             recipe_Has_IngredientDomainTemp.Amount = amountTemp.Amount;
                             amountTempList.Add(recipe_Has_IngredientDomainTemp);
                             ingredientsTempList.Add(ingredientTemp);
+                            idIngredientList.Add(ingredientTemp.idIngredient);//usado para recuperar sus informacion nutricional
 
                         }
                     }
                 }
+                //LISTA DE INFORMACION NUTRICIONAL
+                List<NutritionalDataDomain> nutritionalDataDomainsList = new List<NutritionalDataDomain>();
+                var nutritionalInfo = connectionModel.Nutritionaldata.Where(a => idIngredientList.Contains(a.IngredientIdIngredient)).ToList();
+                foreach (var dataItem in nutritionalInfo)
+                {
+                    NutritionalDataDomain nutritionalDataDomain = new NutritionalDataDomain();
+                    nutritionalDataDomain.IdNutritionalData = dataItem.IdNutritionalData;
+                    nutritionalDataDomain.Calories = dataItem.Calories;
+                    nutritionalDataDomain.Fat = dataItem.Fat;
+                    nutritionalDataDomain.Protein = dataItem.Protein;
+                    nutritionalDataDomain.Carbohydrates = dataItem.Carbohydrates;
+                    nutritionalDataDomain.IngredientIdIngredient = dataItem.IngredientIdIngredient;
+                    nutritionalDataDomainsList.Add(nutritionalDataDomain);
+                }
+
                 response.recipe = recipeTemp;
                 // response.category = categoryTemp;
                 response.stepList = new List<CookinginstructionDomain>();
@@ -146,6 +186,8 @@ namespace NamNamAPI.Business
                 response.ingredientList = ingredientsTempList;
                 response.ingredientAmounList = new List<Recipe_has_IngredientDomain>();
                 response.ingredientAmounList = amountTempList;
+                response.nutritionalDataList = new List<NutritionalDataDomain>();
+                response.nutritionalDataList = nutritionalDataDomainsList;
                 code = 200;
 
             }
@@ -162,16 +204,17 @@ namespace NamNamAPI.Business
         {
             List<RecipeDomain> listDomain = new List<RecipeDomain>();
             GetRecipeResponse response = new GetRecipeResponse();
-           
-                //RECIPE
-                List<Recipe> recipeModel = connectionModel.Recipes.ToList();
-                foreach(var item in recipeModel){
-                    RecipeDomain x = new RecipeDomain();
-                    x.idRecipe = item.IdRecipe;
-                    x.recipeName = item.ReceipName;
-                    listDomain.Add(x);
-                }
-            
+
+            //RECIPE
+            List<Recipe> recipeModel = connectionModel.Recipes.ToList();
+            foreach (var item in recipeModel)
+            {
+                RecipeDomain x = new RecipeDomain();
+                x.idRecipe = item.IdRecipe;
+                x.recipeName = item.ReceipName;
+                listDomain.Add(x);
+            }
+
             return listDomain;
         }
     }
