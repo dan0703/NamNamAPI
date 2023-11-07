@@ -53,25 +53,26 @@ namespace NamNamAPI.Business
             {
 
 
-                // // Verificar si los bytes de la imagen no son nulos y tienen contenido.
-                // if (newRecipe.ImageBytes != null && newRecipe.ImageBytes.Length > 0)
-                // {
-                //     // Ruta de la carpeta donde se guardarán las imágenes (debes ajustarla según tu proyecto).
-                //     string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images");
+                // Verificar si los bytes de la imagen no son nulos y tienen contenido.
+                if (newRecipe.ImageBytes != null && newRecipe.ImageBytes.Length > 0)
+                {
+                    // Ruta de la carpeta donde se guardarán las imágenes (debes ajustarla según tu proyecto).
+                    string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images");
 
-                //     // Verificar si la carpeta existe; si no, créala.
-                //     if (!Directory.Exists(folderPath))
-                //     {
-                //         Directory.CreateDirectory(folderPath);
-                //     }
+                    // Verificar si la carpeta existe; si no, créala.
+                    if (!Directory.Exists(folderPath))
+                    {
+                        Directory.CreateDirectory(folderPath);
+                    }
 
-                //     // Generar un nombre de archivo único para evitar colisiones.
-                //     string fileName = Guid.NewGuid().ToString() + ".jpg";
-                //     string filePath = Path.Combine(folderPath, fileName);
+                    // Generar un nombre de archivo único para evitar colisiones.
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";
+                    string filePath = Path.Combine(folderPath, fileName);
 
-                //     // Guardar los bytes en el archivo.
-                //     File.WriteAllBytes(filePath, newRecipe.ImageBytes);
-                //     ///////////////////////////
+                    // Guardar los bytes en el archivo.
+                    File.WriteAllBytes(filePath, newRecipe.ImageBytes);
+                }
+                    ///////////////////////////
                     Category categoryModel = connectionModel.Categories.Find(categoryDomain.idCategory);
                     if (categoryModel != null)
                     {
