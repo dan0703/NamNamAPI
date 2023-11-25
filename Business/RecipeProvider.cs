@@ -85,6 +85,8 @@ namespace NamNamAPI.Business
                             PreparationTime = TimeOnly.Parse("00:00:00"),
                             IdMainIngredient = newRecipe.idMainIngredient,
                             Portion = newRecipe.Portion,
+                            IsEnable = true
+                            
                         };
                         recipeTemp.CategoryIdCategories.Add(categoryModel);
                         connectionModel.Recipes.Add(recipeTemp);

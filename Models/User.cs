@@ -23,5 +23,7 @@ public partial class User
 
     public virtual ICollection<Category> CategoryIdCategories { get; set; } = new List<Category>();
 
+    public virtual ICollection<Recipe> IdRecipeFavorites { get; set; } = new List<Recipe>();
+
     public virtual ICollection<Recipe> RecipeIdRecipes { get; set; } = new List<Recipe>();
 }
