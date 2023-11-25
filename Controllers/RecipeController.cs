@@ -102,9 +102,26 @@ namespace NamNamAPI.Controllers
             {
                 return StatusCode(500);
             }
-          
             return Ok(list);
 
+        }
+        [HttpPut("UpdateRecipe")]
+        public ActionResult PutUpdateRecipe([FromBody] NewRecipeDomain newRecipeDomain){
+            try{
+                //codigo para actualizar receta
+                bool result = recipeProvider.EditRecipe(newRecipeDomain);
+                if(result){
+                    return Ok();
+                }
+                else{
+                    return BadRequest();
+                }
+            }
+            catch(Exception ex){
+                Console.WriteLine($"Error al obtener recetas: {ex.Message}");
+
+                return StatusCode(500, "Se produjo un error al procesar la solicitud.");
+            }
         }
 
     }
