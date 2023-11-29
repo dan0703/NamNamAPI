@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NamNamAPI", "NamNamAPI.csproj", "{70D3C5A7-6152-4AEF-BFE2-F3983534757E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70D3C5A7-6152-4AEF-BFE2-F3983534757E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D3C5A7-6152-4AEF-BFE2-F3983534757E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D3C5A7-6152-4AEF-BFE2-F3983534757E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D3C5A7-6152-4AEF-BFE2-F3983534757E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3906C3CB-D8DA-46E9-A1C8-36D9F0E433C4}
+	EndGlobalSection
+EndGlobal

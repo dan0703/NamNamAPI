@@ -46,6 +46,28 @@ namespace NamNamAPI.Controllers
 
         }
 
+        [HttpGet("GetFavoriteRecipes/{idUser}")]
+        public ActionResult GetFavoriteRecipes(string idUser)
+        {
+            try
+            {
+                List<RecipeDomain> recipeList = recipeProvider.GetFavoriteRecipes(idUser);
+
+                if (recipeList == null || recipeList.Count == 0)
+                {
+                    return NotFound("No se encontraron recetas favoritas para este usuario.");
+                }
+                return Ok(recipeList);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener recetas favoritas: {ex.Message}");
+
+                return StatusCode(500, "Se produjo un error al procesar la solicitud.");
+            }
+
+        }
+
         [HttpPost("PostRecipe")]
         public ActionResult PostRecipe([FromBody] NewRecipeDomain newRecipeDomain)
         {
