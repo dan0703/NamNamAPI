@@ -33,6 +33,7 @@ namespace NamNamAPI.Business
                     recipe.imageRecipeURL = item.ImageRecipeUrl;
                     recipe.preparationTime = item.PreparationTime.ToString();
                     recipe.idMainIngredient = item.IdMainIngredient;
+                    recipe.Portion = item.Portion;
                     recipeList.Add(recipe);
                 }
             }
@@ -280,50 +281,19 @@ namespace NamNamAPI.Business
                     if (recipeModel.IdMainIngredient != newRecipe.recipeDomain.idMainIngredient)
                         recipeModel.IdMainIngredient = newRecipe.recipeDomain.idMainIngredient;
 
-                    recipeModel.Cookinginstructions.Clear();
-                    recipeModel.RecipeHasIngredients.Clear();
-                    recipeModel.CategoryIdCategories.Clear();
-
-                    foreach (var instruction in newRecipe.instructions)
+                    foreach (var category in recipeModel.CategoryIdCategories.ToList())
                     {
-                        var cookingInstruction = new Cookinginstruction
-                        {
-                            Step = 1,
-                            Instruction = instruction.Instruction,
-                            RecipeIdRecipe = recipeModel.IdRecipe
-                        };
-
-                        recipeModel.Cookinginstructions.Add(cookingInstruction);
+                        recipeModel.CategoryIdCategories.Remove(category);
                     }
-
-                    foreach (var ingredient in newRecipe.recipeHasIngredients)
-                    {
-                        var recipeHasIngredient = new RecipeHasIngredient
-                        {
-                            RecipeIdRecipe = recipeModel.IdRecipe,
-                            IngredientIdIngredient = ingredient.Ingredient_idIngredient,
-                            Amount = ingredient.Amount
-                        };
-
-                        recipeModel.RecipeHasIngredients.Add(recipeHasIngredient);
-                    }
-                    var categoryModel = new Category
-                    {
-                        IdCategory = newRecipe.category.idCategory,
-                        CategoryName = newRecipe.category.categoryName,
-                    };
-
-                    recipeModel.CategoryIdCategories.Add(categoryModel);
-
-                    // Guardar los cambios en la base de datos
+                    Category categoryModel = connectionModel.Categories.Find(newRecipe.category.idCategory);
+                        recipeModel.CategoryIdCategories.Add(categoryModel);
+                }
                     connectionModel.SaveChanges();
 
-                    DeleteImage(recipeModel.ImageRecipeUrl);
+                    //DeleteImage(recipeModel.ImageRecipeUrl);
                     //agregar imagen
                     //guardar url de la imagen
                     result = true;
-                }
-
             }
             catch (Exception e)
             {

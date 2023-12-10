@@ -132,7 +132,10 @@ namespace NamNamAPI.Controllers
             try{
                 //codigo para actualizar receta
                 bool result = recipeProvider.EditRecipe(newRecipeDomain);
-                if(result){
+                bool resultIngredient = ingredientProvider.UpdateRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, newRecipeDomain.recipeDomain.idRecipe);
+                bool resultInstruction = instructionProvider.UpdateInstruction(newRecipeDomain.instructions, newRecipeDomain.recipeDomain.idRecipe);
+
+                if(result && resultIngredient && resultInstruction){
                     return Ok();
                 }
                 else{

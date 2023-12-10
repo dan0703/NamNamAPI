@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\NamNamAPI.csproj": {}
+    "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\NamNamAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\NamNamAPI.csproj": {
+    "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\NamNamAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\NamNamAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\NamNamAPI.csproj",
         "projectName": "NamNamAPI",
-        "projectPath": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\NamNamAPI.csproj",
-        "packagesPath": "C:\\Users\\markb\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\obj\\",
+        "projectPath": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\NamNamAPI.csproj",
+        "packagesPath": "C:\\Users\\Eduar\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\markb\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Eduar\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +22,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -99,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }
