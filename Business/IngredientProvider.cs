@@ -67,5 +67,31 @@ namespace NamNamAPI.Business
             }
             return code;
         }
+
+        public bool UpdateRecipeHasIngredients(List<Recipe_has_IngredientDomain> ingredientsList, string idRecipe)
+        {
+            bool result = false;
+            try
+            {
+                List<RecipeHasIngredient> list = new List<RecipeHasIngredient>();
+                foreach (var item in ingredientsList)
+                {
+                    RecipeHasIngredient recipeHasIngredient = new RecipeHasIngredient();
+                    recipeHasIngredient.IngredientIdIngredient = item.Ingredient_idIngredient;
+                    recipeHasIngredient.RecipeIdRecipe = idRecipe;
+                    recipeHasIngredient.Amount = item.Amount;
+                    list.Add(recipeHasIngredient);
+                }
+                connectionModel.RecipeHasIngredients.RemoveRange(connectionModel.RecipeHasIngredients.Where(a => a.RecipeIdRecipe == idRecipe));
+                connectionModel.RecipeHasIngredients.AddRange(list);
+                connectionModel.SaveChanges();
+                result = true;
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            return result;
+        }
     }
 }

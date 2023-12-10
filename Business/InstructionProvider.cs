@@ -41,5 +41,30 @@ namespace NamNamAPI.Business
             }
             return changes;
         }
+
+        public bool UpdateInstruction(List<CookinginstructionDomain> newInstructions,string idRecipe)
+        {
+            bool changes = false;
+            try{
+                List<Cookinginstruction> instructionsTemp = new List<Cookinginstruction>();
+                foreach(var item in newInstructions){
+
+                    Cookinginstruction itemBD = new Cookinginstruction{
+                        IdCookingInstruction = GenerateRandomID.GenerateID(),
+                        Instruction = item.Instruction,
+                        Step = item.Step,
+                        RecipeIdRecipe = idRecipe
+                    };
+                    instructionsTemp.Add(itemBD);
+                }
+                connectionModel.Cookinginstructions.RemoveRange(connectionModel.Cookinginstructions.Where(a => a.RecipeIdRecipe == idRecipe));
+                connectionModel.Cookinginstructions.AddRange(instructionsTemp);
+                connectionModel.SaveChanges();
+                changes = true;
+            }catch(Exception){
+                changes = false;
+            }
+            return changes;
+        }
     }
 }
