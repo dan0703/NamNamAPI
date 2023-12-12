@@ -137,11 +137,12 @@ namespace NamNamAPI.Controllers
                 var msg = "";
                 if(!result){
                     msg += "Error en receta, ";
-                }else if(!resultIngredient){
+                }
+                if(!resultIngredient){
                     msg += "Error en ingredientes, ";
 
                 }
-                else if(resultInstruction){
+                if(resultInstruction){
                     msg += "Error en instrucciones, ";
                 }
                 if(result && resultIngredient && resultInstruction){
