@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\NamNamAPI.csproj": {}
+    "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\NamNamAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\NamNamAPI.csproj": {
+    "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\NamNamAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\NamNamAPI.csproj",
+        "projectUniqueName": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\NamNamAPI.csproj",
         "projectName": "NamNamAPI",
-        "projectPath": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\NamNamAPI.csproj",
-        "packagesPath": "C:\\Users\\Eduar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\obj\\",
+        "projectPath": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\NamNamAPI.csproj",
+        "packagesPath": "C:\\Users\\jon10\\.nuget\\packages\\",
+        "outputPath": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Eduar\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jon10\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -94,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }
