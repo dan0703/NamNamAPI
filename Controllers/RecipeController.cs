@@ -3,6 +3,7 @@ using NamNamAPI.Business;
 using NamNamAPI.Domain;
 using NamNamAPI.Models;
 using NamNamAPI.Utility;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace NamNamAPI.Controllers
@@ -149,7 +150,13 @@ namespace NamNamAPI.Controllers
                     return Ok();
                 }
                 else{
-                    return BadRequest(msg);
+                    var errorObject = new { mensaje = msg };
+
+                    // Serializar el objeto a JSON
+                    var jsonError = JsonConvert.SerializeObject(errorObject);
+
+                    // Crear una respuesta BadRequest con el cuerpo JSON
+                    return BadRequest(jsonError);
                 }
             }
             catch(Exception ex){
