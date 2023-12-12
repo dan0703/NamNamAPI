@@ -150,13 +150,9 @@ namespace NamNamAPI.Controllers
                     return Ok();
                 }
                 else{
-                    var errorObject = new { mensaje = msg };
-
-                    // Serializar el objeto a JSON
-                    var jsonError = JsonConvert.SerializeObject(errorObject);
 
                     // Crear una respuesta BadRequest con el cuerpo JSON
-                    return BadRequest(jsonError);
+                    return StatusCode(405, msg);
                 }
             }
             catch(Exception ex){
