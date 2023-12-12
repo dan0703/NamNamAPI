@@ -128,21 +128,20 @@ namespace NamNamAPI.Controllers
             return Ok(list);
 
         }
-        [HttpPut("UpdateRecipe")]
+        [HttpPost("PostUpdateRecipe")]
         public ActionResult PutUpdateRecipe([FromBody] NewRecipeDomain newRecipeDomain){
             try{
                 //codigo para actualizar receta
-                bool result = recipeProvider.EditRecipe(newRecipeDomain);
-                //bool resultIngredient = ingredientProvider.UpdateRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, newRecipeDomain.recipeDomain.idRecipe);
-                //bool resultInstruction = instructionProvider.UpdateInstruction(newRecipeDomain.instructions, newRecipeDomain.recipeDomain.idRecipe);
-                if(result){
-                    return Ok();
-                }
-                else{
+                // bool result = recipeProvider.EditRecipe(newRecipeDomain);
+                // if(result){
+                //     return Ok();
+                // }
+                // else{
 
-                    // Crear una respuesta BadRequest con el cuerpo JSON
-                    return BadRequest(new { error = "No se pudo actualizar la receta." });
-                }
+                //     // Crear una respuesta BadRequest con el cuerpo JSON
+                //     return BadRequest(new { error = "No se pudo actualizar la receta." });
+                // }
+                return Ok();
             }
             catch(Exception ex){
                 Console.WriteLine($"Error al obtener recetas: {ex.Message}");
