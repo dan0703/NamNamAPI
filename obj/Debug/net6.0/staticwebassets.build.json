@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "Hash": "VjO7S3OanxmviLtmcm8/TQmvCzJ8/gDnM8GsnSZlZWQ=",
+  "Source": "NamNamAPI",
+  "BasePath": "_content/NamNamAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "NamNamAPI\\wwwroot",
+      "Source": "NamNamAPI",
+      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\Images\\poz.jpg",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "Images/poz.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\poz.jpg"
+    },
+    {
+      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\test.cs",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "test.cs",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\test.cs"
+    }
+  ]
+}
