@@ -280,14 +280,39 @@ namespace NamNamAPI.Business
                         recipeModel.ReceipName = newRecipe.recipeDomain.recipeName;
                     if (recipeModel.IdMainIngredient != newRecipe.recipeDomain.idMainIngredient)
                         recipeModel.IdMainIngredient = newRecipe.recipeDomain.idMainIngredient;
-
+                    //edicion de categoria
                     foreach (var category in recipeModel.CategoryIdCategories.ToList())
                     {
                         recipeModel.CategoryIdCategories.Remove(category);
                     }
                     Category categoryModel = connectionModel.Categories.Find(newRecipe.category.idCategory);
                     recipeModel.CategoryIdCategories.Add(categoryModel);
+                    //edicion de ingredientes
+                    List<RecipeHasIngredient> list = new List<RecipeHasIngredient>();
+                    foreach (var item in newRecipe.recipeHasIngredients)
+                    {
+                        RecipeHasIngredient recipeHasIngredient = new RecipeHasIngredient();
+                        recipeHasIngredient.IngredientIdIngredient = item.Ingredient_idIngredient;
+                        recipeHasIngredient.RecipeIdRecipe = newRecipe.recipeDomain.idRecipe;
+                        recipeHasIngredient.Amount = item.Amount;
+                        list.Add(recipeHasIngredient);
+                    }
+                    connectionModel.RecipeHasIngredients.RemoveRange(connectionModel.RecipeHasIngredients.Where(a => a.RecipeIdRecipe == newRecipe.recipeDomain.idRecipe));
+                    connectionModel.RecipeHasIngredients.AddRange(list);
+                    //edicion de los pasos
+                    List<Cookinginstruction> instructionsTemp = new List<Cookinginstruction>();
+                    foreach(var item in newRecipe.instructions){
 
+                        Cookinginstruction itemBD = new Cookinginstruction{
+                            IdCookingInstruction = GenerateRandomID.GenerateID(),
+                            Instruction = item.Instruction,
+                            Step = item.Step,
+                            RecipeIdRecipe = newRecipe.recipeDomain.idRecipe
+                        };
+                        instructionsTemp.Add(itemBD);
+                    }
+                    connectionModel.Cookinginstructions.RemoveRange(connectionModel.Cookinginstructions.Where(a => a.RecipeIdRecipe == newRecipe.recipeDomain.idRecipe));
+                    connectionModel.Cookinginstructions.AddRange(instructionsTemp);
                     connectionModel.SaveChanges();
                     result = true;
 
