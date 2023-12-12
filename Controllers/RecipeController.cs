@@ -143,7 +143,7 @@ namespace NamNamAPI.Controllers
                     msg += "Error en ingredientes, ";
 
                 }
-                if(resultInstruction){
+                if(!resultInstruction){
                     msg += "Error en instrucciones, ";
                 }
                 if(result && resultIngredient && resultInstruction){

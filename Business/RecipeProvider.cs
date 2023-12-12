@@ -286,14 +286,17 @@ namespace NamNamAPI.Business
                         recipeModel.CategoryIdCategories.Remove(category);
                     }
                     Category categoryModel = connectionModel.Categories.Find(newRecipe.category.idCategory);
-                        recipeModel.CategoryIdCategories.Add(categoryModel);
-                }
+                    recipeModel.CategoryIdCategories.Add(categoryModel);
+
                     connectionModel.SaveChanges();
+                    result = true;
+
+                }
 
                     //DeleteImage(recipeModel.ImageRecipeUrl);
                     //agregar imagen
                     //guardar url de la imagen
-                    result = true;
+
             }
             catch (Exception e)
             {
