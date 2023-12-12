@@ -306,7 +306,7 @@ namespace NamNamAPI.Business
                         Cookinginstruction itemBD = new Cookinginstruction{
                             IdCookingInstruction = GenerateRandomID.GenerateID(),
                             Instruction = item.Instruction,
-                            Step = item.Step,
+                            Step = (int)item.Step,
                             RecipeIdRecipe = newRecipe.recipeDomain.idRecipe
                         };
                         instructionsTemp.Add(itemBD);
