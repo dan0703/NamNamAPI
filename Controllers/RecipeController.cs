@@ -133,30 +133,15 @@ namespace NamNamAPI.Controllers
             try{
                 //codigo para actualizar receta
                 bool result = recipeProvider.EditRecipe(newRecipeDomain);
-                bool resultIngredient = ingredientProvider.UpdateRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, newRecipeDomain.recipeDomain.idRecipe);
-                bool resultInstruction = instructionProvider.UpdateInstruction(newRecipeDomain.instructions, newRecipeDomain.recipeDomain.idRecipe);
-                var msg = "";
-                if(!result){
-                    msg += "Error en receta, ";
-                }
-                if(!resultIngredient){
-                    msg += "Error en ingredientes, ";
-
-                }
-                if(resultInstruction){
-                    msg += "Error en instrucciones, ";
-                }
-                if(result && resultIngredient && resultInstruction){
+                //bool resultIngredient = ingredientProvider.UpdateRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, newRecipeDomain.recipeDomain.idRecipe);
+                //bool resultInstruction = instructionProvider.UpdateInstruction(newRecipeDomain.instructions, newRecipeDomain.recipeDomain.idRecipe);
+                if(result){
                     return Ok();
                 }
                 else{
-                    var errorObject = new { mensaje = msg };
-
-                    // Serializar el objeto a JSON
-                    var jsonError = JsonConvert.SerializeObject(errorObject);
 
                     // Crear una respuesta BadRequest con el cuerpo JSON
-                    return BadRequest(jsonError);
+                    return BadRequest(new { error = "No se pudo actualizar la receta." });
                 }
             }
             catch(Exception ex){
