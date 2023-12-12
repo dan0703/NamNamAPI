@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hU12Lyfq6VwLVg9peNmHaNJYyNhkDWf0QbTNS+kH2Mk=",
+  "Hash": "VjO7S3OanxmviLtmcm8/TQmvCzJ8/gDnM8GsnSZlZWQ=",
   "Source": "NamNamAPI",
   "BasePath": "_content/NamNamAPI",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "NamNamAPI\\wwwroot",
       "Source": "NamNamAPI",
-      "ContentRoot": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\",
+      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
       "BasePath": "_content/NamNamAPI",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\Images\\poz.jpg",
+      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\Images\\poz.jpg",
       "SourceId": "NamNamAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\",
+      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
       "BasePath": "_content/NamNamAPI",
       "RelativePath": "Images/poz.jpg",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\Images\\poz.jpg"
     },
     {
-      "Identity": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\test.cs",
+      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\test.cs",
       "SourceId": "NamNamAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\",
+      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
       "BasePath": "_content/NamNamAPI",
       "RelativePath": "test.cs",
       "AssetKind": "All",
