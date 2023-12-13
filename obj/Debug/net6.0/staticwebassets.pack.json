@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\wwwroot\\Images\\poz.jpg",
+      "PackagePath": "staticwebassets\\Images\\poz.jpg"
+    },
+    {
+      "Id": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\wwwroot\\test.cs",
+      "PackagePath": "staticwebassets\\test.cs"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.NamNamAPI.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.NamNamAPI.props",
+      "PackagePath": "build\\NamNamAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.NamNamAPI.props",
+      "PackagePath": "buildMultiTargeting\\NamNamAPI.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.NamNamAPI.props",
+      "PackagePath": "buildTransitive\\NamNamAPI.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

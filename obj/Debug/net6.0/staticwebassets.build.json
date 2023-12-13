@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "Hash": "2Qhokuggadb/LQK0z+VBIxFYYuWtw6ZvA4xjALJf3so=",
+  "Source": "NamNamAPI",
+  "BasePath": "_content/NamNamAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "NamNamAPI\\wwwroot",
+      "Source": "NamNamAPI",
+      "ContentRoot": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\wwwroot\\Images\\poz.jpg",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "Images/poz.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\poz.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\wwwroot\\test.cs",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\markb\\OneDrive\\Documentos\\UV\\Agosto-Enero2024\\NamNam\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "test.cs",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\test.cs"
+    }
+  ]
+}

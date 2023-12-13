@@ -68,6 +68,52 @@ namespace NamNamAPI.Controllers
 
         }
 
+        [HttpPut("AddFavoriteRecipe/{idUser,idRecipe}")]
+        public ActionResult AddFavoriteRecipe(string idUser, string idRecipe)
+        {
+            try
+            {
+                bool flag = recipeProvider.AddFavoriteRecipe(idUser, idRecipe);
+                if (flag)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al añadir a favoritas: {ex.Message}");
+
+                return StatusCode(500, "Se produjo un error al procesar la solicitud.");
+            }
+        }
+
+        [HttpPut("DeleteFavoriteRecipe/{idUser,idRecipe}")]
+        public ActionResult DeleteFavoriteRecipe(string idUser, string idRecipe)
+        {
+            try
+            {
+                bool flag = recipeProvider.DeleteFavoriteRecipe(idUser, idRecipe);
+                if (flag)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar de favoritas: {ex.Message}");
+
+                return StatusCode(500, "Se produjo un error al procesar la solicitud.");
+            }
+        }
+
         [HttpPost("PostRecipe")]
         public ActionResult PostRecipe([FromBody] NewRecipeDomain newRecipeDomain)
         {
