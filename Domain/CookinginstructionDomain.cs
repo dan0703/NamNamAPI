@@ -2,13 +2,12 @@
 
 public  class CookinginstructionDomain
 {
-    public string? IdCookingInstruction { get; set; } = null!;
+    public string? idCookingInstruction { get; set; } = null!;
 
-    public string? Instruction { get; set; } = null!;
+    public string? instruction { get; set; } = null!;
 
-    public int? Step { get; set; }
+    public int? step { get; set; }
 
-    public string? RecipeIdRecipe { get; set; } = null!;
+    public string? recipeIdRecipe { get; set; } = null!;
 
- 
 }

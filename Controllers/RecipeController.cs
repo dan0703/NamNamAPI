@@ -73,23 +73,23 @@ namespace NamNamAPI.Controllers
         public ActionResult PostRecipe([FromBody] NewRecipeDomain newRecipeDomain)
         {
             int codeInstruction = 0;
-            //primero guarda la foto y regreso el id para guardarla en recipe
+            // //primero guarda la foto y regreso el id para guardarla en recipe
 
             //REGISTRO DE RECIPE Y RECIPE_HAS_INGREDIENTS
             (int codeRecipe, string idRecipe, string error) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain, newRecipeDomain.category);
-            if (codeRecipe == 2)
-            {
-                //REGISTRO DE INSTRUCTIONS
-                codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions, idRecipe);
-                if (codeInstruction == newRecipeDomain.instructions.Count)
-                {
-                    //REGISTRO DE INGREDIENTS
-                    int codeIngredients = ingredientProvider.setRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, idRecipe);
-                    if (codeIngredients == 200)
-                        return Ok();
-                }
-            }
-            return StatusCode(500, error);
+            // if (codeRecipe == 2)
+            // {
+            //     //REGISTRO DE INSTRUCTIONS
+            //     codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions, idRecipe);
+            //     if (codeInstruction == newRecipeDomain.instructions.Count)
+            //     {
+            //         //REGISTRO DE INGREDIENTS
+            //         int codeIngredients = ingredientProvider.setRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, idRecipe);
+            //         if (codeIngredients == 200)
+            //             return Ok();
+            //     }
+            // }
+            return StatusCode(codeRecipe,idRecipe);
         }
 
         [HttpGet("GetRecipe/{idRecipe}")]
@@ -129,10 +129,26 @@ namespace NamNamAPI.Controllers
 
         }
         [HttpPost("PostUpdateRecipe")]
-        public ActionResult UpdateRecipe(){
-          
+        public ActionResult PutUpdateRecipe(NewRecipeDomain newRecipeDomain){
+            try{
+              //  codigo para actualizar receta
+                bool result = recipeProvider.EditRecipe(newRecipeDomain);
+                if(result){
                     return Ok();
-        
+                }
+                else{
+
+                    // Crear una respuesta BadRequest con el cuerpo JSON
+                    return BadRequest(new { error = "No se pudo actualizar la receta." });
+                }
+               
+            }
+            catch(Exception ex){
+                Console.WriteLine($"Error al obtener recetas: {ex.Message}");
+
+                return StatusCode(500, "Se produjo un error al procesar la solicitud.");
+            }
+
         }
 
     }
