@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "VjO7S3OanxmviLtmcm8/TQmvCzJ8/gDnM8GsnSZlZWQ=",
+  "Hash": "OHwpRrBqTT4q0d4QCIfXrSPiDlQxhGfZx+vIkiC/Lic=",
   "Source": "NamNamAPI",
   "BasePath": "_content/NamNamAPI",
   "Mode": "Default",
@@ -16,6 +16,40 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\EnchiladasSuizas.jpg",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "EnchiladasSuizas.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\EnchiladasSuizas.jpg"
+    },
+    {
+      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\Images\\ChilesEnNogada.jpeg",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "Images/ChilesEnNogada.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\ChilesEnNogada.jpeg"
+    },
     {
       "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\Images\\poz.jpg",
       "SourceId": "NamNamAPI",

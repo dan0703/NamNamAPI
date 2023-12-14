@@ -59,7 +59,7 @@ namespace NamNamAPI.Business
                 {
                     var recipe = new RecipeDomain();
                     recipe.idRecipe = item.IdRecipe;
-                    recipe.User_idUser = item.UserIdUser;
+                    recipe.user_idUser = item.UserIdUser;
                     recipe.recipeName = item.ReceipName;
                     recipe.imageRecipeURL = item.ImageRecipeUrl;
                     recipe.preparationTime = item.PreparationTime.ToString();
@@ -141,7 +141,6 @@ namespace NamNamAPI.Business
             int changes = 0;
             string idRecipeNew = GenerateRandomID.GenerateID();
 
-
             try
             {
                 string imagePath = "";
@@ -152,9 +151,9 @@ namespace NamNamAPI.Business
                     Image image = Image.FromStream(ms);
 
                     // Guarda la imagen en la carpeta wwwroot/images con un nombre único
-                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "Images");
-                    string fileName = nameImage + ".png";
-                    string fullPath = Path.Combine(imagePath, nameImage);
+                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot","Images");
+                    string fileName = nameImage + ".jpg";
+                    string fullPath = Path.Combine(imagePath, fileName);
 
                     //Asegúrate de que la carpeta exista, si no, créala
                     if (!Directory.Exists(imagePath))
@@ -164,9 +163,14 @@ namespace NamNamAPI.Business
 
                     // Guarda la imagen
                     image.Save(fullPath);
+                    if(!File.Exists(fullPath))
+                    {
+                        return(500,"ads","das");
+                    }
 
 
                 }
+
 
 
                 ///////////////////////////
@@ -178,7 +182,7 @@ namespace NamNamAPI.Business
                         IdRecipe = idRecipeNew,
                         UserIdUser = newRecipe.user_idUser,
                         ReceipName = newRecipe.recipeName,
-                        ImageRecipeUrl = "https://nam-nam-api2.azurewebsites.net/Images /" + nameImage + ".png",
+                        ImageRecipeUrl = "https://namnam-api2.azurewebsites.net/Images/" + nameImage + ".jpg",
                         PreparationTime = TimeOnly.Parse("00:00:00"),
                         IdMainIngredient = newRecipe.idMainIngredient,
                         Portion = newRecipe.portion,

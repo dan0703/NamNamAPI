@@ -122,18 +122,18 @@ namespace NamNamAPI.Controllers
 
             //REGISTRO DE RECIPE Y RECIPE_HAS_INGREDIENTS
             (int codeRecipe, string idRecipe, string error) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain, newRecipeDomain.category);
-            // if (codeRecipe == 2)
-            // {
-            //     //REGISTRO DE INSTRUCTIONS
-            //     codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions, idRecipe);
-            //     if (codeInstruction == newRecipeDomain.instructions.Count)
-            //     {
-            //         //REGISTRO DE INGREDIENTS
-            //         int codeIngredients = ingredientProvider.setRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, idRecipe);
-            //         if (codeIngredients == 200)
-            //             return Ok();
-            //     }
-            // }
+            if (codeRecipe == 2)
+            {
+                //REGISTRO DE INSTRUCTIONS
+                codeInstruction = instructionProvider.PostInstruction(newRecipeDomain.instructions, idRecipe);
+                if (codeInstruction == newRecipeDomain.instructions.Count)
+                {
+                    //REGISTRO DE INGREDIENTS
+                    int codeIngredients = ingredientProvider.setRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, idRecipe);
+                    if (codeIngredients == 200)
+                        return Ok();
+                }
+            }
             return StatusCode(codeRecipe,idRecipe);
         }
 
