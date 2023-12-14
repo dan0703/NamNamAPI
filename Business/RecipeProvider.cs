@@ -57,7 +57,7 @@ namespace NamNamAPI.Business
                 {
                     var recipe = new RecipeDomain();
                     recipe.idRecipe = item.IdRecipe;
-                    recipe.user_idUser = item.UserIdUser;
+                    recipe.User_idUser = item.UserIdUser;
                     recipe.recipeName = item.ReceipName;
                     recipe.imageRecipeURL = item.ImageRecipeUrl;
                     recipe.preparationTime = item.PreparationTime.ToString();
@@ -70,6 +70,67 @@ namespace NamNamAPI.Business
                 throw new ExceptionBusiness("Error al obtener recetas favoritas: " + e.Message);
             }
             return recipeList;
+        }
+
+        public bool AddFavoriteRecipe(string idUser, string idRecipe)
+        {
+            bool flag = false;
+            try
+            {
+                // Verificar si la receta ya está en la lista de favoritos del usuario
+                var existingFavorite = connectionModel.Recipes
+                    .Include(r => r.IdUserFavorites)
+                    .FirstOrDefault(s => s.IdUserFavorites.Equals(idUser) && s.IdRecipe == idRecipe);
+
+                if (existingFavorite == null)
+                {
+                    var recipe = connectionModel.Recipes.Where(r => r.IdRecipe.Equals(idRecipe)).FirstOrDefault();
+                    var user = connectionModel.Users.Where(r => r.IdUser == idUser).FirstOrDefault();
+
+                    if (recipe != null && user != null)
+                    {
+                        recipe.IdUserFavorites.Add(user);
+                        flag = true;
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBusiness("Error al agregar a recetas favoritas: " + e.Message);
+            }
+            return flag;
+        }
+
+        public bool DeleteFavoriteRecipe(string idUser, string idRecipe)
+        {
+            bool flag = false;
+            try
+            {
+                // Verificar si la receta ya está en la lista de favoritos del usuario
+                var existingFavorite = connectionModel.Recipes
+                    .Include(r => r.IdUserFavorites)
+                    .FirstOrDefault(s => s.IdUserFavorites.Equals(idUser) && s.IdRecipe == idRecipe);
+
+                if (existingFavorite == null)
+                {
+                    var recipe = connectionModel.Recipes.Where(r => r.IdRecipe.Equals(idRecipe)).FirstOrDefault();
+                    var user = connectionModel.Users.Where(r => r.IdUser == idUser).FirstOrDefault();
+
+                    if (user != null && recipe != null)
+                    {
+                        recipe.IdUserFavorites.Remove(user);
+                        connectionModel.SaveChanges();
+                        flag = true;
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBusiness("Error al eliminar de recetas favoritas: " + e.Message);
+            }
+            return flag;
         }
 
         public (int, string, string) PostRecipe(RecipeDomain newRecipe, CategoryDomain categoryDomain)
