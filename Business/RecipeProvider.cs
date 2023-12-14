@@ -4,6 +4,8 @@ using NamNamAPI.Domain;
 using NamNamAPI.Models;
 using Newtonsoft.utility;
 using System.Globalization;
+using System.Drawing;
+using System.IO;
 
 namespace NamNamAPI.Business
 {
@@ -28,12 +30,12 @@ namespace NamNamAPI.Business
                 {
                     var recipe = new RecipeDomain();
                     recipe.idRecipe = item.IdRecipe;
-                    recipe.User_idUser = item.UserIdUser;
+                    recipe.user_idUser = item.UserIdUser;
                     recipe.recipeName = item.ReceipName;
                     recipe.imageRecipeURL = item.ImageRecipeUrl;
                     recipe.preparationTime = item.PreparationTime.ToString();
                     recipe.idMainIngredient = item.IdMainIngredient;
-                    recipe.Portion = item.Portion;
+                    recipe.portion = item.Portion;
                     recipeList.Add(recipe);
                 }
             }
@@ -57,7 +59,7 @@ namespace NamNamAPI.Business
                 {
                     var recipe = new RecipeDomain();
                     recipe.idRecipe = item.IdRecipe;
-                    recipe.User_idUser = item.UserIdUser;
+                    recipe.user_idUser = item.UserIdUser;
                     recipe.recipeName = item.ReceipName;
                     recipe.imageRecipeURL = item.ImageRecipeUrl;
                     recipe.preparationTime = item.PreparationTime.ToString();
@@ -72,58 +74,126 @@ namespace NamNamAPI.Business
             return recipeList;
         }
 
+        public bool AddFavoriteRecipe(string idUser, string idRecipe)
+        {
+            bool flag = false;
+            try
+            {
+                // Verificar si la receta ya está en la lista de favoritos del usuario
+                var existingFavorite = connectionModel.Recipes
+                    .Include(r => r.IdUserFavorites)
+                    .FirstOrDefault(s => s.IdUserFavorites.Equals(idUser) && s.IdRecipe == idRecipe);
+
+                if (existingFavorite == null)
+                {
+                    var recipe = connectionModel.Recipes.Where(r => r.IdRecipe.Equals(idRecipe)).FirstOrDefault();
+                    var user = connectionModel.Users.Where(r => r.IdUser == idUser).FirstOrDefault();
+
+                    if (recipe != null && user != null)
+                    {
+                        recipe.IdUserFavorites.Add(user);
+                        flag = true;
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBusiness("Error al agregar a recetas favoritas: " + e.Message);
+            }
+            return flag;
+        }
+
+        public bool DeleteFavoriteRecipe(string idUser, string idRecipe)
+        {
+            bool flag = false;
+            try
+            {
+                // Verificar si la receta ya está en la lista de favoritos del usuario
+                var existingFavorite = connectionModel.Recipes
+                    .Include(r => r.IdUserFavorites)
+                    .FirstOrDefault(s => s.IdUserFavorites.Equals(idUser) && s.IdRecipe == idRecipe);
+
+                if (existingFavorite == null)
+                {
+                    var recipe = connectionModel.Recipes.Where(r => r.IdRecipe.Equals(idRecipe)).FirstOrDefault();
+                    var user = connectionModel.Users.Where(r => r.IdUser == idUser).FirstOrDefault();
+
+                    if (user != null && recipe != null)
+                    {
+                        recipe.IdUserFavorites.Remove(user);
+                        connectionModel.SaveChanges();
+                        flag = true;
+                    }
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBusiness("Error al eliminar de recetas favoritas: " + e.Message);
+            }
+            return flag;
+        }
+
         public (int, string, string) PostRecipe(RecipeDomain newRecipe, CategoryDomain categoryDomain)
         {
             string errormsg = "";
             int changes = 0;
             string idRecipeNew = GenerateRandomID.GenerateID();
 
-
             try
             {
-
-
-                // Verificar si los bytes de la imagen no son nulos y tienen contenido.
-                if (newRecipe.ImageBytes != null && newRecipe.ImageBytes.Length > 0)
+                string imagePath = "";
+                string nameImage = GenerateRandomID.GenerateID();
+                byte[] imageBytes = Convert.FromBase64String(newRecipe.imageBase);
+                using (MemoryStream ms = new MemoryStream(imageBytes))
                 {
-                    // Ruta de la carpeta donde se guardarán las imágenes (debes ajustarla según tu proyecto).
-                    string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Images");
+                    Image image = Image.FromStream(ms);
 
-                    // Verificar si la carpeta existe; si no, créala.
-                    if (!Directory.Exists(folderPath))
+                    // Guarda la imagen en la carpeta wwwroot/images con un nombre único
+                    imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot","Images");
+                    string fileName = nameImage + ".jpg";
+                    string fullPath = Path.Combine(imagePath, fileName);
+
+                    //Asegúrate de que la carpeta exista, si no, créala
+                    if (!Directory.Exists(imagePath))
                     {
-                        Directory.CreateDirectory(folderPath);
+                        Directory.CreateDirectory(imagePath);
                     }
 
-                    // Generar un nombre de archivo único para evitar colisiones.
-                    string fileName = Guid.NewGuid().ToString() + ".jpg";
-                    string filePath = Path.Combine(folderPath, fileName);
+                    // Guarda la imagen
+                    image.Save(fullPath);
+                    if(!File.Exists(fullPath))
+                    {
+                        return(500,"ads","das");
+                    }
 
-                    // Guardar los bytes en el archivo.
-                    File.WriteAllBytes(filePath, newRecipe.ImageBytes);
+
                 }
 
-                    ///////////////////////////
-                    Category categoryModel = connectionModel.Categories.Find(categoryDomain.idCategory);
-                    if (categoryModel != null)
+
+
+                ///////////////////////////
+                Category categoryModel = connectionModel.Categories.Find(categoryDomain.idCategory);
+                if (categoryModel != null)
+                {
+                    Recipe recipeTemp = new Recipe
                     {
-                        Recipe recipeTemp = new Recipe
-                        {
-                            IdRecipe = idRecipeNew,
-                            UserIdUser = newRecipe.User_idUser,
-                            ReceipName = newRecipe.recipeName,
-                            ImageRecipeUrl = "https://nam-nam-api.azurewebsites.net/Image/poz.jpg",
-                            PreparationTime = TimeOnly.Parse("00:00:00"),
-                            IdMainIngredient = newRecipe.idMainIngredient,
-                            Portion = newRecipe.Portion,
-                            IsEnable = true
-                            
-                        };
-                        recipeTemp.CategoryIdCategories.Add(categoryModel);
-                        connectionModel.Recipes.Add(recipeTemp);
-                        changes = connectionModel.SaveChanges();
-                    }
-                
+                        IdRecipe = idRecipeNew,
+                        UserIdUser = newRecipe.user_idUser,
+                        ReceipName = newRecipe.recipeName,
+                        ImageRecipeUrl = "https://namnam-api2.azurewebsites.net/Images/" + nameImage + ".jpg",
+                        PreparationTime = TimeOnly.Parse("00:00:00"),
+                        IdMainIngredient = newRecipe.idMainIngredient,
+                        Portion = newRecipe.portion,
+                        IsEnable = true
+
+                    };
+                    recipeTemp.CategoryIdCategories.Add(categoryModel);
+                    connectionModel.Recipes.Add(recipeTemp);
+                    changes = connectionModel.SaveChanges();
+                }
+
 
             }
             catch (Exception e)
@@ -157,11 +227,11 @@ namespace NamNamAPI.Business
                     RecipeDomain recipeTemp = new RecipeDomain();
                     recipeTemp.idRecipe = recipeModel.IdRecipe;
                     recipeTemp.recipeName = recipeModel.ReceipName;
-                    recipeTemp.User_idUser = recipeModel.UserIdUser;
+                    recipeTemp.user_idUser = recipeModel.UserIdUser;
                     recipeTemp.imageRecipeURL = recipeModel.ImageRecipeUrl;
                     recipeTemp.preparationTime = recipeModel.PreparationTime.ToString();
                     recipeTemp.idMainIngredient = recipeModel.IdMainIngredient;
-                    recipeTemp.Portion = recipeModel.Portion;
+                    recipeTemp.portion = recipeModel.Portion;
                     var category = recipeModel.CategoryIdCategories.ToList()[0];
                     CategoryDomain categoryTemp = new CategoryDomain();
                     categoryTemp.idCategory = category.IdCategory;
@@ -173,10 +243,10 @@ namespace NamNamAPI.Business
                     {
                         Console.WriteLine("paso: " + item.Instruction);
                         CookinginstructionDomain step = new CookinginstructionDomain();
-                        step.IdCookingInstruction = item.IdCookingInstruction;
-                        step.Instruction = item.Instruction;
-                        step.RecipeIdRecipe = item.RecipeIdRecipe;
-                        step.Step = item.Step;
+                        step.idCookingInstruction = item.IdCookingInstruction;
+                        step.instruction = item.Instruction;
+                        step.recipeIdRecipe = item.RecipeIdRecipe;
+                        step.step = item.Step;
                         instructionTempList.Add(step);
                     }
                     //LISTA DE INGREDIENTS
@@ -195,9 +265,9 @@ namespace NamNamAPI.Business
                                 ingredientTemp.ingredientname = ingredientItem.IngredientName;
                                 ingredientTemp.measure = ingredientItem.Measure;
                                 Recipe_has_IngredientDomain recipe_Has_IngredientDomainTemp = new Recipe_has_IngredientDomain();
-                                recipe_Has_IngredientDomainTemp.Recipe_idRecipe = amountTemp.RecipeIdRecipe;
-                                recipe_Has_IngredientDomainTemp.Ingredient_idIngredient = amountTemp.IngredientIdIngredient;
-                                recipe_Has_IngredientDomainTemp.Amount = amountTemp.Amount;
+                                recipe_Has_IngredientDomainTemp.recipe_idRecipe = amountTemp.RecipeIdRecipe;
+                                recipe_Has_IngredientDomainTemp.ingredient_idIngredient = amountTemp.IngredientIdIngredient;
+                                recipe_Has_IngredientDomainTemp.amount = amountTemp.Amount;
                                 amountTempList.Add(recipe_Has_IngredientDomainTemp);
                                 ingredientsTempList.Add(ingredientTemp);
                                 idIngredientList.Add(ingredientTemp.idIngredient);//usado para recuperar sus informacion nutricional
@@ -274,26 +344,56 @@ namespace NamNamAPI.Business
 
                 if (recipeModel != null)
                 {
-                    if (recipeModel.Portion != newRecipe.recipeDomain.Portion)
-                        recipeModel.Portion = newRecipe.recipeDomain.Portion;
+                    if (recipeModel.Portion != newRecipe.recipeDomain.portion)
+                        recipeModel.Portion = newRecipe.recipeDomain.portion;
                     if (recipeModel.ReceipName != newRecipe.recipeDomain.recipeName)
                         recipeModel.ReceipName = newRecipe.recipeDomain.recipeName;
                     if (recipeModel.IdMainIngredient != newRecipe.recipeDomain.idMainIngredient)
                         recipeModel.IdMainIngredient = newRecipe.recipeDomain.idMainIngredient;
-
+                    //edicion de categoria
                     foreach (var category in recipeModel.CategoryIdCategories.ToList())
                     {
                         recipeModel.CategoryIdCategories.Remove(category);
                     }
                     Category categoryModel = connectionModel.Categories.Find(newRecipe.category.idCategory);
-                        recipeModel.CategoryIdCategories.Add(categoryModel);
-                }
-                    connectionModel.SaveChanges();
+                    recipeModel.CategoryIdCategories.Add(categoryModel);
+                    //edicion de ingredientes
+                    List<RecipeHasIngredient> list = new List<RecipeHasIngredient>();
+                    foreach (var item in newRecipe.recipeHasIngredients)
+                    {
+                        RecipeHasIngredient recipeHasIngredient = new RecipeHasIngredient();
+                        recipeHasIngredient.IngredientIdIngredient = item.ingredient_idIngredient;
+                        recipeHasIngredient.RecipeIdRecipe = newRecipe.recipeDomain.idRecipe;
+                        recipeHasIngredient.Amount = item.amount;
+                        list.Add(recipeHasIngredient);
+                    }
+                    connectionModel.RecipeHasIngredients.RemoveRange(connectionModel.RecipeHasIngredients.Where(a => a.RecipeIdRecipe == newRecipe.recipeDomain.idRecipe));
+                    connectionModel.RecipeHasIngredients.AddRange(list);
+                    //edicion de los pasos
+                    List<Cookinginstruction> instructionsTemp = new List<Cookinginstruction>();
+                    foreach (var item in newRecipe.instructions)
+                    {
 
-                    //DeleteImage(recipeModel.ImageRecipeUrl);
-                    //agregar imagen
-                    //guardar url de la imagen
+                        Cookinginstruction itemBD = new Cookinginstruction
+                        {
+                            IdCookingInstruction = GenerateRandomID.GenerateID(),
+                            Instruction = item.instruction,
+                            Step = (int)item.step,
+                            RecipeIdRecipe = newRecipe.recipeDomain.idRecipe
+                        };
+                        instructionsTemp.Add(itemBD);
+                    }
+                    connectionModel.Cookinginstructions.RemoveRange(connectionModel.Cookinginstructions.Where(a => a.RecipeIdRecipe == newRecipe.recipeDomain.idRecipe));
+                    connectionModel.Cookinginstructions.AddRange(instructionsTemp);
+                    connectionModel.SaveChanges();
                     result = true;
+
+                }
+
+                //DeleteImage(recipeModel.ImageRecipeUrl);
+                //agregar imagen
+                //guardar url de la imagen
+
             }
             catch (Exception e)
             {

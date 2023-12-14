@@ -51,9 +51,9 @@ namespace NamNamAPI.Business
                 foreach (var item in ingredientsList)
                 {
                     RecipeHasIngredient recipeHasIngredient = new RecipeHasIngredient();
-                    recipeHasIngredient.IngredientIdIngredient = item.Ingredient_idIngredient;
+                    recipeHasIngredient.IngredientIdIngredient = item.ingredient_idIngredient;
                     recipeHasIngredient.RecipeIdRecipe = idRecipe;
-                    recipeHasIngredient.Amount = item.Amount;
+                    recipeHasIngredient.Amount = item.amount;
                     list.Add(recipeHasIngredient);
                 }
                 connectionModel.RecipeHasIngredients.AddRange(list);
@@ -77,9 +77,9 @@ namespace NamNamAPI.Business
                 foreach (var item in ingredientsList)
                 {
                     RecipeHasIngredient recipeHasIngredient = new RecipeHasIngredient();
-                    recipeHasIngredient.IngredientIdIngredient = item.Ingredient_idIngredient;
+                    recipeHasIngredient.IngredientIdIngredient = item.ingredient_idIngredient;
                     recipeHasIngredient.RecipeIdRecipe = idRecipe;
-                    recipeHasIngredient.Amount = item.Amount;
+                    recipeHasIngredient.Amount = item.amount;
                     list.Add(recipeHasIngredient);
                 }
                 connectionModel.RecipeHasIngredients.RemoveRange(connectionModel.RecipeHasIngredients.Where(a => a.RecipeIdRecipe == idRecipe));

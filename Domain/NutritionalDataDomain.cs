@@ -2,7 +2,7 @@ namespace NamNamAPI.Domain;
 
 public class NutritionalDataDomain
 {
-    public string IdNutritionalData { get; set; } 
+    public string IdNutritionalData { get; set; }
 
     public int? Calories { get; set; }
 

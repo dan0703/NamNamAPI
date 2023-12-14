@@ -1,11 +1,19 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\Images\\poz.jpg",
+      "Id": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\EnchiladasSuizas.jpg",
+      "PackagePath": "staticwebassets\\EnchiladasSuizas.jpg"
+    },
+    {
+      "Id": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\Images\\ChilesEnNogada.jpeg",
+      "PackagePath": "staticwebassets\\Images\\ChilesEnNogada.jpeg"
+    },
+    {
+      "Id": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\Images\\poz.jpg",
       "PackagePath": "staticwebassets\\Images\\poz.jpg"
     },
     {
-      "Id": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\test.cs",
+      "Id": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\test.cs",
       "PackagePath": "staticwebassets\\test.cs"
     },
     {

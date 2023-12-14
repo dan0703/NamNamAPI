@@ -26,7 +26,7 @@ namespace NamNamAPI.Business
 
                     Cookinginstruction itemBD = new Cookinginstruction{
                         IdCookingInstruction = GenerateRandomID.GenerateID(),
-                        Instruction = item.Instruction,
+                        Instruction = item.instruction,
                         Step = steps,
                         RecipeIdRecipe = idRecipe
                     };
@@ -35,7 +35,7 @@ namespace NamNamAPI.Business
                 }
                 connectionModel.Cookinginstructions.AddRange(instructionsTemp);
                  changes = connectionModel.SaveChanges();
-                         
+
             }catch(Exception e){
                 changes = 500;
             }
@@ -51,8 +51,8 @@ namespace NamNamAPI.Business
 
                     Cookinginstruction itemBD = new Cookinginstruction{
                         IdCookingInstruction = GenerateRandomID.GenerateID(),
-                        Instruction = item.Instruction,
-                        Step = item.Step,
+                        Instruction = item.instruction,
+                        Step = (int)item.step,
                         RecipeIdRecipe = idRecipe
                     };
                     instructionsTemp.Add(itemBD);

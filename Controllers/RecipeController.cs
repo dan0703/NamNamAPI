@@ -3,6 +3,7 @@ using NamNamAPI.Business;
 using NamNamAPI.Domain;
 using NamNamAPI.Models;
 using NamNamAPI.Utility;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace NamNamAPI.Controllers
@@ -45,7 +46,6 @@ namespace NamNamAPI.Controllers
             }
 
         }
-
         [HttpGet("GetFavoriteRecipes/{idUser}")]
         public ActionResult GetFavoriteRecipes(string idUser)
         {
@@ -68,11 +68,57 @@ namespace NamNamAPI.Controllers
 
         }
 
+        [HttpPut("AddFavoriteRecipe/{idUser,idRecipe}")]
+        public ActionResult AddFavoriteRecipe(string idUser, string idRecipe)
+        {
+            try
+            {
+                bool flag = recipeProvider.AddFavoriteRecipe(idUser, idRecipe);
+                if (flag)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al añadir a favoritas: {ex.Message}");
+
+                return StatusCode(500, "Se produjo un error al procesar la solicitud.");
+            }
+        }
+
+        [HttpPut("DeleteFavoriteRecipe/{idUser,idRecipe}")]
+        public ActionResult DeleteFavoriteRecipe(string idUser, string idRecipe)
+        {
+            try
+            {
+                bool flag = recipeProvider.DeleteFavoriteRecipe(idUser, idRecipe);
+                if (flag)
+                {
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al eliminar de favoritas: {ex.Message}");
+
+                return StatusCode(500, "Se produjo un error al procesar la solicitud.");
+            }
+        }
+
         [HttpPost("PostRecipe")]
         public ActionResult PostRecipe([FromBody] NewRecipeDomain newRecipeDomain)
         {
             int codeInstruction = 0;
-            //primero guarda la foto y regreso el id para guardarla en recipe
+            // //primero guarda la foto y regreso el id para guardarla en recipe
 
             //REGISTRO DE RECIPE Y RECIPE_HAS_INGREDIENTS
             (int codeRecipe, string idRecipe, string error) = recipeProvider.PostRecipe(newRecipeDomain.recipeDomain, newRecipeDomain.category);
@@ -88,7 +134,7 @@ namespace NamNamAPI.Controllers
                         return Ok();
                 }
             }
-            return StatusCode(500, error);
+            return StatusCode(codeRecipe,idRecipe);
         }
 
         [HttpGet("GetRecipe/{idRecipe}")]
@@ -127,26 +173,27 @@ namespace NamNamAPI.Controllers
             return Ok(list);
 
         }
-        [HttpPut("UpdateRecipe")]
-        public ActionResult PutUpdateRecipe([FromBody] NewRecipeDomain newRecipeDomain){
+        [HttpPost("PostUpdateRecipe")]
+        public ActionResult PutUpdateRecipe(NewRecipeDomain newRecipeDomain){
             try{
-                //codigo para actualizar receta
+              //  codigo para actualizar receta
                 bool result = recipeProvider.EditRecipe(newRecipeDomain);
-                bool resultIngredient = ingredientProvider.UpdateRecipeHasIngredients(newRecipeDomain.recipeHasIngredients, newRecipeDomain.recipeDomain.idRecipe);
-                bool resultInstruction = instructionProvider.UpdateInstruction(newRecipeDomain.instructions, newRecipeDomain.recipeDomain.idRecipe);
-
-                if(result && resultIngredient && resultInstruction){
+                if(result){
                     return Ok();
                 }
                 else{
-                    return BadRequest();
+
+                    // Crear una respuesta BadRequest con el cuerpo JSON
+                    return BadRequest(new { error = "No se pudo actualizar la receta." });
                 }
+               
             }
             catch(Exception ex){
                 Console.WriteLine($"Error al obtener recetas: {ex.Message}");
 
                 return StatusCode(500, "Se produjo un error al procesar la solicitud.");
             }
+
         }
 
     }
