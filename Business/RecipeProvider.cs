@@ -412,23 +412,24 @@ namespace NamNamAPI.Business
                     connectionModel.Cookinginstructions.AddRange(instructionsTemp);
                     connectionModel.SaveChanges();
 
-                    var imagePath = recipeModel.ImageRecipeUrl;
+                    var imageOld = recipeModel.ImageRecipeUrl;
                     //Guardar nueva imagen
                     string nameImage = GenerateRandomID.GenerateID();
                     byte[] imageBytes = Convert.FromBase64String(newRecipe.recipeDomain.imageBase);
+                    string fullPath = "";
                     using (MemoryStream ms = new MemoryStream(imageBytes))
                     {
                         //DeleteImage
-                        if (File.Exists(imagePath))
+                        if (File.Exists(imageOld))
                         {
                             // Elimina la imagen existente
-                            File.Delete(imagePath);
+                            File.Delete(imageOld);
                         }
                         Image image = Image.FromStream(ms);
                         // Guarda la imagen en la carpeta wwwroot/images con un nombre único
-                        imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot","Images");
+                        string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot","Images");
                         string fileName = nameImage + ".jpg";
-                        string fullPath = Path.Combine(imagePath, fileName);
+                        fullPath = Path.Combine(imagePath, fileName);
 
                         //Asegúrate de que la carpeta exista, si no, créala
                         if (!Directory.Exists(imagePath))
@@ -438,11 +439,9 @@ namespace NamNamAPI.Business
 
                         // Guarda la imagen
                         image.Save(fullPath);
-                        if(!File.Exists(fullPath))
-                        {
-                            return false;
-                        }
                     }
+                    recipeModel.ImageRecipeUrl = fullPath;
+                    connectionModel.SaveChanges();
                     result = true;
                 }
             }
