@@ -369,6 +369,47 @@ namespace NamNamAPI.Business
 
                 if (recipeModel != null)
                 {
+                    //edicion de imagen
+                    if(newRecipe.recipeDomain.imageBase != null){
+
+                        var imageOld = recipeModel.ImageRecipeUrl;
+                        //Guardar nueva imagen
+                        string nameImage = GenerateRandomID.GenerateID();
+                        byte[] imageBytes = Convert.FromBase64String(newRecipe.recipeDomain.imageBase);
+                        string fullPath = "";
+                        using (MemoryStream ms = new MemoryStream(imageBytes))
+                        {
+                            //DeleteImage
+                            if (File.Exists(imageOld))
+                            {
+                                // Elimina la imagen existente
+                                File.Delete(imageOld);
+                            }
+                            Image image = Image.FromStream(ms);
+                            // Guarda la imagen en la carpeta wwwroot/images con un nombre único
+                            string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot","Images");
+                            string fileName = nameImage + ".jpg";
+                            fullPath = Path.Combine(imagePath, fileName);
+
+                            //Asegúrate de que la carpeta exista, si no, créala
+                            if (!Directory.Exists(imagePath))
+                            {
+                                Directory.CreateDirectory(imagePath);
+                            }
+
+                            // Guarda la imagen
+                            image.Save(fullPath);
+                            if(!File.Exists(fullPath))
+                            {
+                                return false;
+                            }
+                        }
+                        recipeModel.ImageRecipeUrl = "https://namnam-api2.azurewebsites.net/Image/" + nameImage + ".jpg";
+                    }
+                    else{
+                        return false;
+                    }
+
                     if (recipeModel.Portion != newRecipe.recipeDomain.portion)
                         recipeModel.Portion = newRecipe.recipeDomain.portion;
                     if (recipeModel.ReceipName != newRecipe.recipeDomain.recipeName)
@@ -411,37 +452,6 @@ namespace NamNamAPI.Business
                     connectionModel.Cookinginstructions.RemoveRange(connectionModel.Cookinginstructions.Where(a => a.RecipeIdRecipe == newRecipe.recipeDomain.idRecipe));
                     connectionModel.Cookinginstructions.AddRange(instructionsTemp);
                     connectionModel.SaveChanges();
-
-                    var imageOld = recipeModel.ImageRecipeUrl;
-                    //Guardar nueva imagen
-                    string nameImage = GenerateRandomID.GenerateID();
-                    byte[] imageBytes = Convert.FromBase64String(newRecipe.recipeDomain.imageBase);
-                    string fullPath = "";
-                    using (MemoryStream ms = new MemoryStream(imageBytes))
-                    {
-                        //DeleteImage
-                        if (File.Exists(imageOld))
-                        {
-                            // Elimina la imagen existente
-                            File.Delete(imageOld);
-                        }
-                        Image image = Image.FromStream(ms);
-                        // Guarda la imagen en la carpeta wwwroot/images con un nombre único
-                        string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot","Images");
-                        string fileName = nameImage + ".jpg";
-                        fullPath = Path.Combine(imagePath, fileName);
-
-                        //Asegúrate de que la carpeta exista, si no, créala
-                        if (!Directory.Exists(imagePath))
-                        {
-                            Directory.CreateDirectory(imagePath);
-                        }
-
-                        // Guarda la imagen
-                        image.Save(fullPath);
-                    }
-                    recipeModel.ImageRecipeUrl = "https://namnam-api2.azurewebsites.net/Image/" + nameImage + ".jpg";
-                    connectionModel.SaveChanges();
                     result = true;
                 }
             }
@@ -450,27 +460,6 @@ namespace NamNamAPI.Business
                 throw new ExceptionBusiness("Error al editar receta: " + e.Message);
             }
             return result;
-        }
-        public void DeleteImage(string path)
-        {
-            try
-            {
-                // Verifica si el archivo existe antes de intentar eliminarlo
-                if (File.Exists(path))
-                {
-                    // Elimina el archivo
-                    File.Delete(path);
-                    Console.WriteLine($"Archivo {path} eliminado correctamente.");
-                }
-                else
-                {
-                    Console.WriteLine($"El archivo {path} no existe.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error al eliminar el archivo: {ex.Message}");
-            }
         }
     }
 }
