@@ -440,7 +440,7 @@ namespace NamNamAPI.Business
                         // Guarda la imagen
                         image.Save(fullPath);
                     }
-                    recipeModel.ImageRecipeUrl = fullPath;
+                    recipeModel.ImageRecipeUrl = "https://namnam-api2.azurewebsites.net/Image/" + nameImage + ".jpg";
                     connectionModel.SaveChanges();
                     result = true;
                 }
