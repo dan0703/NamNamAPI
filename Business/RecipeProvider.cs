@@ -45,6 +45,31 @@ namespace NamNamAPI.Business
             }
             return recipeList;
         }
+        public List<RecipeDomain> GetRecipeList()
+        {
+            List<RecipeDomain> recipeList = new List<RecipeDomain>();
+            try
+            {
+                var listRecipe = connectionModel.Recipes.ToList();
+                foreach (var item in listRecipe)
+                {
+                    var recipe = new RecipeDomain();
+                    recipe.idRecipe = item.IdRecipe;
+                    recipe.user_idUser = item.UserIdUser;
+                    recipe.recipeName = item.ReceipName;
+                    recipe.imageRecipeURL = item.ImageRecipeUrl;
+                    recipe.preparationTime = item.PreparationTime.ToString();
+                    recipe.idMainIngredient = item.IdMainIngredient;
+                    recipe.portion = item.Portion;
+                    recipeList.Add(recipe);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new ExceptionBusiness("Error al obtener recetas: " + e.Message);
+            }
+            return recipeList;
+        }
 
         public List<RecipeDomain> GetFavoriteRecipes(string idUser)
         {

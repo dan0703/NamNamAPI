@@ -25,6 +25,28 @@ namespace NamNamAPI.Controllers
 
         }
 
+        [HttpGet("GetRecipeList")]
+        public ActionResult GetRecipeList()
+        {
+            try
+            {
+                List<RecipeDomain> recipeList = recipeProvider.GetRecipeList();
+
+                if (recipeList == null || recipeList.Count == 0)
+                {
+                    return NotFound("No se encontraron recetas registradas");
+                }
+                return Ok(recipeList);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error al obtener recetas: {ex.Message}");
+
+                return StatusCode(500, "Se produjo un error al procesar la solicitud.");
+            }
+
+        }
+
         [HttpGet("GetCookbook/{idUser}")]
         public ActionResult GetCookbook(string idUser)
         {
