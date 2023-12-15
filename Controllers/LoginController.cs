@@ -53,6 +53,26 @@
         }
 
         [ApiExplorerSettings(IgnoreApi = false)]
+        [HttpPost("GetUserInfo")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<ActionResult> GetUserInfo(string idUser){
+        
+            try{
+
+                var result = await _login.GetUserInfo(idUser);
+                if(result == null){
+                    return StatusCode((int)HttpStatusCode.InternalServerError);
+                }
+                return Ok(result);
+            }
+            catch(Exception ex){
+                Console.WriteLine(ex.StackTrace);
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [ApiExplorerSettings(IgnoreApi = false)]
         [HttpPost("RegisterUser")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
@@ -63,6 +83,24 @@
 
                 var result = await _login.Register(userInformation);
                 if(result == null){
+                    return StatusCode((int)HttpStatusCode.InternalServerError);
+                }
+                return Ok(result);
+            }
+            catch(Exception ex){
+                Console.WriteLine(ex.StackTrace);
+                return StatusCode((int)HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [ApiExplorerSettings(IgnoreApi = false)]
+        [HttpPost("ModifyUser")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        public async Task<ActionResult> ModifyUser([FromBody] UserDomain userInformation){
+            try{
+                var result = await _login.UpdateUser(userInformation);
+                if(result==false){
                     return StatusCode((int)HttpStatusCode.InternalServerError);
                 }
                 return Ok(result);

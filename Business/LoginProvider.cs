@@ -49,6 +49,80 @@ namespace NamNamAPI.Business
                 throw new Exception(e.Message);
             }
         }
+        public async Task<UserDomain> GetUserInfo(string idUser)
+        {
+            bool canConnect = await _connectionModel.Database.CanConnectAsync();
+            try
+            {
+                if (!canConnect)
+                {
+                    throw new Exception("No se pudo establecer conexión con la base de datos.");
+                }
+                else
+                {
+                    var user = await _connectionModel.Users.Where(x => x.IdUser.Equals(idUser)).FirstOrDefaultAsync();
+
+                    if (user == null)
+                    {
+                        return null;
+                    }
+                    else
+                    {
+                        return new UserDomain
+                        {
+                            idUser = user.IdUser,
+                            firstname = user.FirstName,
+                            email = user.Email,
+                            password = user.Password
+                        };
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public async Task<bool> UpdateUser(UserDomain user)
+    {
+    bool canConnect = await _connectionModel.Database.CanConnectAsync();
+    try
+    {
+        if (!canConnect)
+        {
+            throw new Exception("No se pudo establecer conexión con la base de datos.");
+        }
+        else
+        {
+            // Buscar el usuario existente por su IdUser
+            var existingUser = await _connectionModel.Users.FindAsync(user.idUser);
+
+            if (existingUser != null)
+            {
+                // Actualizar las propiedades del usuario existente
+                existingUser.FirstName = user.firstname;
+                existingUser.LastName = user.lastname;
+                if(user.password!=""){
+                    existingUser.Password = user.password;
+                }
+                // Guardar los cambios en la base de datos
+                await _connectionModel.SaveChangesAsync();
+
+                return true;
+            }
+            else
+            {
+                // El usuario no existe, puedes manejar esto según tus necesidades
+                throw new Exception("Usuario no encontrado");
+            }
+        }
+    }
+    catch (Exception e)
+    {
+        throw new Exception(e.Message);
+    }
+}
+
 
         public async Task<string> Register(UserDomain user)
         {
