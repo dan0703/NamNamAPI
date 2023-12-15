@@ -386,14 +386,40 @@ namespace NamNamAPI.Business
                     connectionModel.Cookinginstructions.RemoveRange(connectionModel.Cookinginstructions.Where(a => a.RecipeIdRecipe == newRecipe.recipeDomain.idRecipe));
                     connectionModel.Cookinginstructions.AddRange(instructionsTemp);
                     connectionModel.SaveChanges();
+
+                    var imagePath = recipeModel.ImageRecipeUrl;
+                    //Guardar nueva imagen
+                    string nameImage = GenerateRandomID.GenerateID();
+                    byte[] imageBytes = Convert.FromBase64String(newRecipe.recipeDomain.imageBase);
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        //DeleteImage
+                        if (File.Exists(imagePath))
+                        {
+                            // Elimina la imagen existente
+                            File.Delete(imagePath);
+                        }
+                        Image image = Image.FromStream(ms);
+                        // Guarda la imagen en la carpeta wwwroot/images con un nombre único
+                        imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot","Images");
+                        string fileName = nameImage + ".jpg";
+                        string fullPath = Path.Combine(imagePath, fileName);
+
+                        //Asegúrate de que la carpeta exista, si no, créala
+                        if (!Directory.Exists(imagePath))
+                        {
+                            Directory.CreateDirectory(imagePath);
+                        }
+
+                        // Guarda la imagen
+                        image.Save(fullPath);
+                        if(!File.Exists(fullPath))
+                        {
+                            return false;
+                        }
+                    }
                     result = true;
-
                 }
-
-                //DeleteImage(recipeModel.ImageRecipeUrl);
-                //agregar imagen
-                //guardar url de la imagen
-
             }
             catch (Exception e)
             {

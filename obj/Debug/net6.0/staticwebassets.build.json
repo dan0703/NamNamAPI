@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "Hash": "VKNr4V1eR3aOSb1B2Og7SqTJs45USwQlA4KssxyDMD8=",
+  "Source": "NamNamAPI",
+  "BasePath": "_content/NamNamAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "NamNamAPI\\wwwroot",
+      "Source": "NamNamAPI",
+      "ContentRoot": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\EnchiladasSuizas.jpg",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "EnchiladasSuizas.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\EnchiladasSuizas.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\Images\\ChilesEnNogada.jpeg",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "Images/ChilesEnNogada.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\ChilesEnNogada.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\Images\\poz.jpg",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "Images/poz.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\poz.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\test.cs",
+      "SourceId": "NamNamAPI",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Eduar\\source\\repos\\NamNamAPI\\API_NamNam\\wwwroot\\",
+      "BasePath": "_content/NamNamAPI",
+      "RelativePath": "test.cs",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\test.cs"
+    }
+  ]
+}
