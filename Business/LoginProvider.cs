@@ -61,7 +61,6 @@ namespace NamNamAPI.Business
                 else
                 {
                     var user = await _connectionModel.Users.Where(x => x.IdUser.Equals(idUser)).FirstOrDefaultAsync();
-
                     if (user == null)
                     {
                         return null;

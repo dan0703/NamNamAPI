@@ -53,11 +53,11 @@
         }
 
         [ApiExplorerSettings(IgnoreApi = false)]
-        [HttpPost("GetUserInfo")]
+        [HttpGet("GetUserInfo/{idUser}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult> GetUserInfo(string idUser){
-        
+
             try{
 
                 var result = await _login.GetUserInfo(idUser);
