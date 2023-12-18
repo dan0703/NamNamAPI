@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "OHwpRrBqTT4q0d4QCIfXrSPiDlQxhGfZx+vIkiC/Lic=",
+  "Hash": "JuLS3rBbL8Cihp85DUm7We2LNojOa4H1oS7E0LNRxRo=",
   "Source": "NamNamAPI",
   "BasePath": "_content/NamNamAPI",
   "Mode": "Default",
@@ -8,19 +8,19 @@
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "NamNamAPI\\wwwroot",
+      "Name": "NamNamAPI/wwwroot",
       "Source": "NamNamAPI",
-      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "ContentRoot": "/Users/danjoshuasegura/Documents/API_NamNam/wwwroot/",
       "BasePath": "_content/NamNamAPI",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\EnchiladasSuizas.jpg",
+      "Identity": "/Users/danjoshuasegura/Documents/API_NamNam/wwwroot/EnchiladasSuizas.jpg",
       "SourceId": "NamNamAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "ContentRoot": "/Users/danjoshuasegura/Documents/API_NamNam/wwwroot/",
       "BasePath": "_content/NamNamAPI",
       "RelativePath": "EnchiladasSuizas.jpg",
       "AssetKind": "All",
@@ -31,13 +31,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\EnchiladasSuizas.jpg"
+      "OriginalItemSpec": "wwwroot/EnchiladasSuizas.jpg"
     },
     {
-      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\Images\\ChilesEnNogada.jpeg",
+      "Identity": "/Users/danjoshuasegura/Documents/API_NamNam/wwwroot/Images/ChilesEnNogada.jpeg",
       "SourceId": "NamNamAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "ContentRoot": "/Users/danjoshuasegura/Documents/API_NamNam/wwwroot/",
       "BasePath": "_content/NamNamAPI",
       "RelativePath": "Images/ChilesEnNogada.jpeg",
       "AssetKind": "All",
@@ -48,13 +48,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Images\\ChilesEnNogada.jpeg"
+      "OriginalItemSpec": "wwwroot/Images/ChilesEnNogada.jpeg"
     },
     {
-      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\Images\\poz.jpg",
+      "Identity": "/Users/danjoshuasegura/Documents/API_NamNam/wwwroot/Images/poz.jpg",
       "SourceId": "NamNamAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "ContentRoot": "/Users/danjoshuasegura/Documents/API_NamNam/wwwroot/",
       "BasePath": "_content/NamNamAPI",
       "RelativePath": "Images/poz.jpg",
       "AssetKind": "All",
@@ -65,13 +65,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\Images\\poz.jpg"
+      "OriginalItemSpec": "wwwroot/Images/poz.jpg"
     },
     {
-      "Identity": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\test.cs",
+      "Identity": "/Users/danjoshuasegura/Documents/API_NamNam/wwwroot/test.cs",
       "SourceId": "NamNamAPI",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\ArchivosCarrera\\SEMESTRES\\noveno semestre AGO2023-DIC2023\\SO Moviles\\NamNamAPI\\NamNamAPI\\wwwroot\\",
+      "ContentRoot": "/Users/danjoshuasegura/Documents/API_NamNam/wwwroot/",
       "BasePath": "_content/NamNamAPI",
       "RelativePath": "test.cs",
       "AssetKind": "All",
@@ -82,7 +82,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\test.cs"
+      "OriginalItemSpec": "wwwroot/test.cs"
     }
   ]
 }
